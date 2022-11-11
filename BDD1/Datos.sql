@@ -1,3 +1,15 @@
+-- BORRAR TODO 
+DROP TABLE APLICATIVOS,
+           APLICATIVOS_MENU,
+           PERMISOS,
+           PERSONAS,
+           PERSONAS_PREGUNTAS,
+           PREGUNTAS ,
+           ROLES_APLICATIVOS,
+           ROLES_APLICATIVOS_MENU,
+           ROLES_NEGOCIO,
+           ROLES_NEGOCIOS_APLICATIVOS;
+
 -- OK
 CREATE TABLE IF NOT EXISTS PREGUNTAS (
     preg_id int PRIMARY KEY,
@@ -62,8 +74,8 @@ CREATE TABLE IF NOT EXISTS PERSONAS (
     apellidos varchar(20) NOT NULL,
     direccion varchar(50) NOT NULL,
     ciudad varchar(20) NOT NULL,
-    departamento varchar(20) NOT NULL
-    -- hashpwd
+    departamento varchar(20) NOT NULL,
+    hasspwd varchar(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS PERSONAS_PREGUNTAS (
@@ -78,15 +90,13 @@ CREATE TABLE IF NOT EXISTS PERSONAS_PREGUNTAS (
 CREATE TABLE IF NOT EXISTS PERMISOS (
     user_id int NOT NULL,
     rol_neg_id int NOT NULL,
-    rol_id int NOT NULL,
     app_id int NOT NULL,
     fecha_solicitud date NOT NULL,
-    fecha_autorizacion date NOT NULL,
+    fecha_autorizacion date,
     estado varchar(20) NOT NULL,
 
     FOREIGN KEY (user_id) REFERENCES PERSONAS(user_id),
     FOREIGN KEY (rol_neg_id) REFERENCES ROLES_NEGOCIO(rol_neg_id),
-    FOREIGN KEY (rol_id) REFERENCES ROLES_APLICATIVOS(rol_id),
     FOREIGN KEY (app_id) REFERENCES APLICATIVOS(app_id)
 );
 
@@ -100,23 +110,6 @@ INSERT INTO PREGUNTAS VALUES (2, '¿Cuál es el nombre de su restaurante favorit
 INSERT INTO PREGUNTAS VALUES (3, '¿Cuántos hermanos tiene?');
 INSERT INTO PREGUNTAS VALUES (4, '¿Cómo se llama su hermano menor?');
 INSERT INTO PREGUNTAS VALUES (5, '¿Cuál es el nombre de su abuela?');
-
-
-
--- PERMISOS -----------------------
--- --------------------------------
-
--- INSERT INTO PERMISOS VALUES (1, 'acceso_al_menu');
--- INSERT INTO PERMISOS VALUES (2, 'acceso_a_lista_de_ingredientes');
--- INSERT INTO PERMISOS VALUES (3, 'acceso_a_lista_de_reservaciones');
--- INSERT INTO PERMISOS VALUES (4, 'acceso_a_finanzas');
--- INSERT INTO PERMISOS VALUES (5, 'acceso_a_lista_de_clientes_actuales');
--- INSERT INTO PERMISOS VALUES (5, 'acceso_a_recetas');
--- INSERT INTO PERMISOS VALUES (7, 'acceso_a_stock_del_bar');
--- INSERT INTO PERMISOS VALUES (8, 'acceso_a_stock_de_limpieza');
--- INSERT INTO PERMISOS VALUES (9, 'acceso_a_pedidos');
--- INSERT INTO PERMISOS VALUES (10, 'acceso_a_pedidos_a_domicilio');
-
 
 
 -- APLICATIVOS -------------------------
@@ -216,3 +209,19 @@ INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (8, 8, 8);
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (9, 9, 9);
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (10, 10, 10);
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (11, 11, 11);
+
+
+-- PERSONAS --------------------------------------
+-- -----------------------------------------------
+
+INSERT INTO PERSONAS VALUES (1, 'Juan', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
+INSERT INTO PERSONAS VALUES (2, 'Nicolas Mazzey', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo',  '4d186321c1a7f0f354b297e8914ab240');
+INSERT INTO PERSONAS VALUES (3, 'Federico', 'Ferreira', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
+
+
+-- PERMISOS ---------------------------------------
+-- ------------------------------------------------
+
+INSERT INTO PERMISOS VALUES (1, 1, 1, '2022/12/10', '2022/12/11', 'autorizado');
+INSERT INTO PERMISOS VALUES (2, 2, 2, '2022/12/10', '2022/12/11', 'autorizado');
+INSERT INTO PERMISOS VALUES (3, 3, 3, '2022/12/10', '2022/12/11', 'autorizado');

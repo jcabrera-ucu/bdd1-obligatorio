@@ -1,13 +1,25 @@
 package bdd;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class RegistroPersonas extends javax.swing.JFrame {
+    
+    private final Map<String, Pregunta> opcionesPreguntas = new HashMap<>();
 
     /**
      * Creates new form RegistroPersonas
      */
-    public RegistroPersonas() {
+    public RegistroPersonas(List<Pregunta> preguntas) {        
         initComponents();
+        
+        preguntas.forEach(x -> { 
+            opcionesPreguntas.put(x.getPregunta(), x);
+            preguntasComboBox.addItem(x.getPregunta());
+        });
     }
 
     /**
@@ -31,15 +43,16 @@ public class RegistroPersonas extends javax.swing.JFrame {
         L_Ciudad = new javax.swing.JLabel();
         L_Departamento = new javax.swing.JLabel();
         L_Titulo = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        preguntasComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Contrasenia = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         BotonRegistro.setText("Regristrarme");
         BotonRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -61,10 +74,6 @@ public class RegistroPersonas extends javax.swing.JFrame {
         L_Titulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         L_Titulo.setText("Registro de Persona:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pregunta de seguridad 1", "Pregunta de seguridad 2", "Pregunta de seguridad 3", "Pregunta de seguridad4" }));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setText("Pregunta de seguridad:");
@@ -104,15 +113,14 @@ public class RegistroPersonas extends javax.swing.JFrame {
                                             .addComponent(L_Apellido))
                                         .addGap(0, 0, Short.MAX_VALUE)))
                                 .addGap(36, 36, 36)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jComboBox1, 0, 180, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(Contrasenia)
-                                .addComponent(jLabel3))
-                            .addComponent(BotonRegistro))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(preguntasComboBox, 0, 180, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel3)
+                            .addComponent(BotonRegistro)
+                            .addComponent(jPasswordField1))
                         .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
@@ -127,7 +135,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(preguntasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(L_Apellido)
@@ -148,7 +156,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(L_Departamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,13 +174,11 @@ public class RegistroPersonas extends javax.swing.JFrame {
         //Codigo al apretar el boton aca
     }//GEN-LAST:event_BotonRegistroActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Apellido;
     private javax.swing.JButton BotonRegistro;
     private javax.swing.JTextField Ciudad;
-    private javax.swing.JTextField Contrasenia;
     private javax.swing.JTextField Departamento;
     private javax.swing.JTextField Direccion;
     private javax.swing.JLabel L_Apellido;
@@ -182,11 +188,12 @@ public class RegistroPersonas extends javax.swing.JFrame {
     private javax.swing.JLabel L_Nombre;
     private javax.swing.JLabel L_Titulo;
     private javax.swing.JTextField Nombre;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JComboBox<String> preguntasComboBox;
     // End of variables declaration//GEN-END:variables
 }

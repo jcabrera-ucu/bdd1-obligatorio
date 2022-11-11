@@ -29,8 +29,7 @@ public class BDD1 {
             System.out.println("  > " + aplicativo.toString());
         }
         
-        System.out.println("contraseña hasheada");
-        SimpleMD5Example coso = new SimpleMD5Example();
-        coso.hasheo("1234");
+        var frame = new RegistroPersonas(new Preguntas(conn).getAll());
+        frame.setVisible(true);
     }
 }
