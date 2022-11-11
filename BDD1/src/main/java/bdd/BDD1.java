@@ -28,5 +28,8 @@ public class BDD1 {
         for (var aplicativo : new Aplicativos(conn).getAll()) {
             System.out.println("  > " + aplicativo.toString());
         }
+        
+        var frame = new RegistroPersonas(new Preguntas(conn).getAll());
+        frame.setVisible(true);
     }
 }
