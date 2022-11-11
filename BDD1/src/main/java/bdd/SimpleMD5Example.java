@@ -8,7 +8,7 @@ public class SimpleMD5Example
 {
   public static void main(String[] args) 
   {
-    String passwordToHash = "password";
+    String passwordToHash = "contraseña";
     String generatedPassword = null;
 
     try 
