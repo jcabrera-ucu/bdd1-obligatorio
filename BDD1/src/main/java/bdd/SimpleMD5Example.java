@@ -6,9 +6,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class SimpleMD5Example 
 {
-  public static void main(String[] args) 
-  {
-    String passwordToHash = "contraseña";
+  public void hasheo (String contraseña){
+    String passwordToHash = contraseña;
     String generatedPassword = null;
 
     try 
