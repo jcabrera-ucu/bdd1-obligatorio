@@ -12,25 +12,25 @@ DROP TABLE APLICATIVOS,
 
 -- OK
 CREATE TABLE IF NOT EXISTS PREGUNTAS (
-    preg_id int PRIMARY KEY,
+    preg_id serial PRIMARY KEY,
     pregunta varchar(256) NOT NULL
 );
 
 -- OK
 CREATE TABLE IF NOT EXISTS ROLES_NEGOCIO (
-    rol_neg_id int PRIMARY KEY,
+    rol_neg_id serial PRIMARY KEY,
     descripcion_rol_neg varchar(100) NOT NULL
 );
 
 -- OK
 CREATE TABLE IF NOT EXISTS APLICATIVOS (
-    app_id int PRIMARY KEY,
+    app_id serial PRIMARY KEY,
     nobreapp varchar(20) NOT NULL
 );
 
 -- OK
 CREATE TABLE IF NOT EXISTS ROLES_APLICATIVOS (
-    rol_id int PRIMARY KEY,
+    rol_id serial PRIMARY KEY,
     app_id int NOT NULL,
     descripcion_rol varchar(100) NOT NULL,
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS ROLES_NEGOCIOS_APLICATIVOS (
 
 -- OK
 CREATE TABLE IF NOT EXISTS APLICATIVOS_MENU (
-    menu_id int PRIMARY KEY,
+    menu_id serial PRIMARY KEY,
     app_id int NOT NULL,
     descripcion_menu varchar(100) NOT NULL,
 
@@ -69,13 +69,13 @@ CREATE TABLE IF NOT EXISTS ROLES_APLICATIVOS_MENU (
 );
 
 CREATE TABLE IF NOT EXISTS PERSONAS (
-    user_id int PRIMARY KEY,
+    user_id serial PRIMARY KEY,
     nombres varchar(20) NOT NULL,
     apellidos varchar(20) NOT NULL,
     direccion varchar(50) NOT NULL,
     ciudad varchar(20) NOT NULL,
     departamento varchar(20) NOT NULL,
-    hasspwd varchar(40) NOT NULL
+    hashpwd varchar(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS PERSONAS_PREGUNTAS (
@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS PERSONAS_PREGUNTAS (
     preg_id int NOT NULL,
     respuesta varchar(40) NOT NULL,
 
+    UNIQUE (user_id, preg_id),
     FOREIGN KEY (user_id) REFERENCES PERSONAS(user_id),
     FOREIGN KEY (preg_id) REFERENCES PREGUNTAS(preg_id)
 );
@@ -214,14 +215,14 @@ INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (11, 11, 11);
 -- PERSONAS --------------------------------------
 -- -----------------------------------------------
 
-INSERT INTO PERSONAS VALUES (1, 'Juan', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
-INSERT INTO PERSONAS VALUES (2, 'Nicolas Mazzey', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo',  '4d186321c1a7f0f354b297e8914ab240');
-INSERT INTO PERSONAS VALUES (3, 'Federico', 'Ferreira', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
+-- INSERT INTO PERSONAS VALUES (1, 'Juan', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
+-- INSERT INTO PERSONAS VALUES (2, 'Nicolas Mazzey', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo',  '4d186321c1a7f0f354b297e8914ab240');
+-- INSERT INTO PERSONAS VALUES (3, 'Federico', 'Ferreira', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
 
 
 -- PERMISOS ---------------------------------------
 -- ------------------------------------------------
 
-INSERT INTO PERMISOS VALUES (1, 1, 1, '2022/12/10', '2022/12/11', 'autorizado');
-INSERT INTO PERMISOS VALUES (2, 2, 2, '2022/12/10', '2022/12/11', 'autorizado');
-INSERT INTO PERMISOS VALUES (3, 3, 3, '2022/12/10', '2022/12/11', 'autorizado');
+-- INSERT INTO PERMISOS VALUES (1, 1, 1, '2022/12/10', '2022/12/11', 'autorizado');
+-- INSERT INTO PERMISOS VALUES (2, 2, 2, '2022/12/10', '2022/12/11', 'autorizado');
+-- INSERT INTO PERMISOS VALUES (3, 3, 3, '2022/12/10', '2022/12/11', 'autorizado');
