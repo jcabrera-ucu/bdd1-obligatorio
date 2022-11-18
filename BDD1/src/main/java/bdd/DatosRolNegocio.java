@@ -9,10 +9,10 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 
-public class RolesNegocio {
+public class DatosRolNegocio {
     private final Connection connection;
     
-    public RolesNegocio(Connection connection) {
+    public DatosRolNegocio(Connection connection) {
         this.connection = connection;
     }
     

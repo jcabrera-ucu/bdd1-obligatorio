@@ -27,8 +27,20 @@ public class BDD1 {
 ////        for (var aplicativo : new Aplicativos((Conn.getInstance().connBD).getAll()) {
 ////            System.out.println("  > " + aplicativo.toString());
 ////        }
-//        
-//        var frame = new RegistroPersonas(new Preguntas(Conn.getInstance().getConn()).getAll(), new RolesNegocio(Conn.getInstance().getConn()).getAll(), new Aplicativos(Conn.getInstance().getConn()).getAll());
-//        frame.setVisible(true);
+
+
+        var datosPersonas = new DatosPersonas(Conn.getInstance().getConn());
+        var datosPreguntas = new DatosPreguntas(Conn.getInstance().getConn());
+        var datosPersonaPregunta = new DatosPersonaPregunta(Conn.getInstance().getConn());
+        var datosAplicativos = new DatosAplicativos(Conn.getInstance().getConn());
+        var datosRolNegocio = new DatosRolNegocio(Conn.getInstance().getConn());
+
+        var frame = new RegistroPersonas(
+            datosPreguntas.getAll(),
+            datosRolNegocio.getAll(),
+            datosAplicativos.getAll()
+        );
+
+        frame.setVisible(true);
     }
 }

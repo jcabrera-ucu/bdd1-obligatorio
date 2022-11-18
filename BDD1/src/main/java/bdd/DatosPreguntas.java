@@ -20,7 +20,7 @@ public class DatosPreguntas {
         LinkedList<Pregunta> preguntas = new LinkedList<>();
         
         try (Statement st = connection.createStatement(); 
-             ResultSet rs = st.executeQuery("SELECT * FROM preguntas")) {
+             ResultSet rs = st.executeQuery("SELECT * FROM PREGUNTAS")) {
             
             while (rs.next()) {
                 preguntas.add(new Pregunta(

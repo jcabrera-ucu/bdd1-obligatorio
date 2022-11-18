@@ -27,7 +27,7 @@ public class DatosPersonas {
                                                     "direccion, " +
                                                     "ciudad, " +
                                                     "departamento, " +
-                                                    "hashpwd FROM personas")) {
+                                                    "hashpwd FROM PERSONAS")) {
             while (rs.next()) {
                 personas.add(new Persona(
                     rs.getInt("user_id"), 
