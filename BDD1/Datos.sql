@@ -161,6 +161,7 @@ INSERT INTO ROLES_APLICATIVOS VALUES (8, 8, 'prepara_tragos');
 INSERT INTO ROLES_APLICATIVOS VALUES (9, 9, 'cuida_que_no_haya_quilombo');
 INSERT INTO ROLES_APLICATIVOS VALUES (10, 10, 'recibe_a_la_gente');
 INSERT INTO ROLES_APLICATIVOS VALUES (11, 11, 'ratita');
+INSERT INTO ROLES_APLICATIVOS VALUES (12, 12, 'administrador_de_seguridad');
 
 
 -- APLICATIVOS MENU -----------------------
