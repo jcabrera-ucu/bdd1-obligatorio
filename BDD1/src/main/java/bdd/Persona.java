@@ -1,6 +1,5 @@
 package bdd;
 
-// import java.sql.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -37,5 +36,9 @@ public class Persona {
     
     public void setPassword(String pwd) {
         hashpwd = BCrypt.hashpw(pwd, BCrypt.gensalt());
+    }
+
+    public boolean isPasswordCorrect(String pwd) {
+        return BCrypt.checkpw(pwd, hashpwd);
     }
 }
