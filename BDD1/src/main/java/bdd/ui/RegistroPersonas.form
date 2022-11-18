@@ -62,6 +62,8 @@
                           <Component id="rolComboBox" alignment="0" max="32767" attributes="0"/>
                           <Component id="AplicativosComboBox" alignment="0" max="32767" attributes="0"/>
                           <Component id="Password" alignment="0" min="-2" pref="338" max="-2" attributes="0"/>
+                          <Component id="BotonRegistro" min="-2" max="-2" attributes="0"/>
+                          <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -224,7 +226,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="respuestaTextArea">
         </Component>
       </SubComponents>
     </Container>
