@@ -9,27 +9,23 @@ import java.sql.*;
 public class BDD1 {
 
     public static void main(String[] args) throws SQLException {
-        
-        String connectionString = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=postgres&ssl=false";
-        
-        Connection conn = DriverManager.getConnection(connectionString);  
+         
 
         System.out.println("Preguntas:");
-        for (var pregunta : new Preguntas(conn).getAll()) {
+        for (var pregunta : new Preguntas(Conn.getInstance().getConn()).getAll()) {
             System.out.println("  > " + pregunta.toString());
         }
 
         System.out.println("Roles Negocio:");
-        for (var rolNegocio : new RolesNegocio(conn).getAll()) {
-            System.out.println("  > " + rolNegocio.toString());
+        for (var rolNegocio : new RolesNegocio(Conn.getInstance().getConn()).getAll()) {
         }
 
-        System.out.println("Aplicativos");
-        for (var aplicativo : new Aplicativos(conn).getAll()) {
-            System.out.println("  > " + aplicativo.toString());
-        }
+//        System.out.println("Aplicativos");
+//        for (var aplicativo : new Aplicativos((Conn.getInstance().connBD).getAll()) {
+//            System.out.println("  > " + aplicativo.toString());
+//        }
         
-        var frame = new RegistroPersonas(new Preguntas(conn).getAll());
+        var frame = new RegistroPersonas(new Preguntas(Conn.getInstance().getConn()).getAll(), new RolesNegocio(Conn.getInstance().getConn()).getAll(), new Aplicativos(Conn.getInstance().getConn()).getAll());
         frame.setVisible(true);
     }
 }
