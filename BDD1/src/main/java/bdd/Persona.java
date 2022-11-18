@@ -15,8 +15,6 @@ public class Persona {
     public String departamento;
     public String hashpwd;
     
-
-
     public Persona(int userId, 
                    String nombres, 
                    String apellidos, 
