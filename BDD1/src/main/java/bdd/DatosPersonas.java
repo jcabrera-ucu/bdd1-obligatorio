@@ -9,27 +9,37 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 
-public class Preguntas {
+public class DatosPersonas {
     private final Connection connection;
     
-    public Preguntas(Connection connection) {
+    public DatosPersonas(Connection connection) {
         this.connection = connection;
     }
     
-    public List<Pregunta> getAll() throws SQLException {
-        LinkedList<Pregunta> preguntas = new LinkedList<>();
+    public List<Persona> getAll() throws SQLException {
+        LinkedList<Persona> personas = new LinkedList<>();
         
         try (Statement st = connection.createStatement(); 
-             ResultSet rs = st.executeQuery("SELECT * FROM preguntas")) {
-            
+             ResultSet rs = st.executeQuery("SELECT user_id, " +
+                                                    "nombres, " +
+                                                    "apellidos, " +
+                                                    "direccion, " +
+                                                    "ciudad, " +
+                                                    "departamento, " +
+                                                    "hashpwd FROM personas")) {
             while (rs.next()) {
-                preguntas.add(new Pregunta(
+                personas.add(new Persona(
                     rs.getInt(1), 
-                    rs.getString(2)
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7)
                 ));
             }
         }
         
-        return preguntas;
+        return personas;
     }
 }

@@ -1,4 +1,4 @@
-package bdd;
+package bdd.ui;
 
 
 public class GestionIdentidadesPermisos extends javax.swing.JFrame {

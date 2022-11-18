@@ -1,5 +1,6 @@
 package bdd;
 
+import bdd.ui.RegistroPersonas;
 import java.sql.*;
 
 

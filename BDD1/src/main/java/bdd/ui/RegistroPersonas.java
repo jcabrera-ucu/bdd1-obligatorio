@@ -1,5 +1,8 @@
-package bdd;
+package bdd.ui;
 
+import bdd.Aplicativo;
+import bdd.Pregunta;
+import bdd.RolNegocio;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -252,14 +255,14 @@ public class RegistroPersonas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
-
-        Persona persona = new Persona(Integer.parseInt(Cedula.getText()), Nombre.getText(), Apellido.getText(),
-                Direccion.getText(), Ciudad.getText(), Departamento.getText(), String.valueOf(Password.getPassword()));
-        try{
-        persona.cargarADB();
-        }catch(SQLException x){
-            System.out.println("Algo salio mal");
-        }
+//
+//        Persona persona = new Persona(Integer.parseInt(Cedula.getText()), Nombre.getText(), Apellido.getText(),
+//                Direccion.getText(), Ciudad.getText(), Departamento.getText(), String.valueOf(Password.getPassword()));
+//        try{
+//        persona.cargarADB();
+//        }catch(SQLException x){
+//            System.out.println("Algo salio mal");
+//        }
     }//GEN-LAST:event_BotonRegistroActionPerformed
 
     private void CiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CiudadActionPerformed

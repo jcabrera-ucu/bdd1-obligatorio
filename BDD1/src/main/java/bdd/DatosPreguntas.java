@@ -9,10 +9,10 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 
-public class Preguntas {
+public class DatosPreguntas {
     private final Connection connection;
     
-    public Preguntas(Connection connection) {
+    public DatosPreguntas(Connection connection) {
         this.connection = connection;
     }
     
