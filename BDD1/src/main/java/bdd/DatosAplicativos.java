@@ -9,10 +9,10 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 
-public class Aplicativos {
+public class DatosAplicativos {
     private final Connection connection;
     
-    public Aplicativos(Connection connection) {
+    public DatosAplicativos(Connection connection) {
         this.connection = connection;
     }
     

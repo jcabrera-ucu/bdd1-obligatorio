@@ -2,15 +2,9 @@ package bdd;
 
 
 public class PersonaPregunta {
-    public Integer userId;
-    public Integer pregId;
+    public int userId;
+    public int pregId;
     public String respuesta;
-    
-    public PersonaPregunta(String respuesta) {
-        this.userId = null;
-        this.pregId = null;
-        this.respuesta = respuesta;
-    }
 
     public PersonaPregunta(int userId, int pregId, String respuesta) {
         this.userId = userId;
