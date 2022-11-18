@@ -226,7 +226,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="respuestaTextArea">
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
         </Component>
       </SubComponents>
     </Container>
