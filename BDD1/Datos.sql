@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS PERSONAS (
     direccion varchar(50) NOT NULL,
     ciudad varchar(20) NOT NULL,
     departamento varchar(20) NOT NULL,
-    hashpwd varchar(40) NOT NULL
+    hashpwd varchar(256) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS PERSONAS_PREGUNTAS (

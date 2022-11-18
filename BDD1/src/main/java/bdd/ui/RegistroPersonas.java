@@ -4,15 +4,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import bdd.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegistroPersonas extends javax.swing.JFrame {
 
-    private final Map<String, Pregunta> opcionesPreguntas = new HashMap<>();
-    private final Map<String, RolNegocio> opcionesRolNegocio = new HashMap<>();
-    private final Map<String, Aplicativo> opcionesAplicativo = new HashMap<>();
+    private final List<Pregunta> opcionesPreguntas;
+    private final List<RolNegocio> opcionesRolNegocio;
+    private final List<Aplicativo> opcionesAplicativo;
+
+    private final DatosPersonas datosPersonas;
+    private final DatosPersonaPregunta datosPersonaPregunta;
 
 
     /**
@@ -22,21 +28,85 @@ public class RegistroPersonas extends javax.swing.JFrame {
      * @param roles
      * @param aplicativos
      */
-    public RegistroPersonas(List<Pregunta> preguntas, List<RolNegocio> roles, List<Aplicativo> aplicativos) {
+    public RegistroPersonas(DatosPersonas datosPersonas, 
+                            DatosPersonaPregunta datosPersonaPregunta,
+                            List<Pregunta> preguntas, 
+                            List<RolNegocio> roles,
+                            List<Aplicativo> aplicativos) {
         initComponents();
 
-        preguntas.forEach(x -> {
-            opcionesPreguntas.put(x.getPregunta(), x);
+        this.datosPersonas = datosPersonas;
+        this.datosPersonaPregunta = datosPersonaPregunta;
+
+        this.opcionesPreguntas = preguntas;
+        this.opcionesRolNegocio = roles;
+        this.opcionesAplicativo = aplicativos;
+
+        opcionesPreguntas.forEach(x -> {
             preguntasComboBox.addItem(x.getPregunta());
         });
-        roles.forEach(x -> {
-            opcionesRolNegocio.put(x.getDescripcionRolNeg(), x);
-            rolComboBox.addItem(x.getDescripcionRolNeg());
-        });
-        aplicativos.forEach(x -> {
-            opcionesAplicativo.put(x.getNombreApp(), x);
-            AplicativosComboBox.addItem(x.getNombreApp());
-        });
+
+        // opcionesRolNegocio.forEach(x -> {
+        //     rolComboBox.addItem(x.getDescripcionRolNeg());
+        // });
+
+        // opcionesAplicativo.forEach(x -> {
+        //     AplicativosComboBox.addItem(x.getNombreApp());
+        // });
+    }
+
+    public Persona registrarPersona() {
+        Pregunta pregunta = null;
+        
+        if (preguntasComboBox.getSelectedIndex() != 0) {
+            pregunta = opcionesPreguntas.get(preguntasComboBox.getSelectedIndex() - 1);
+        }
+//        var rolNegocio = opcionesRolNegocio.get(rolComboBox.getSelectedIndex() - 1);
+//        var aplicativo = opcionesAplicativo.get(AplicativosComboBox.getSelectedIndex() - 1);
+
+        var userId = Integer.parseInt(Cedula.getText());
+        
+        try {
+            if (datosPersonas.getById(userId) != null) {
+                var f = new PersonaYaExiste(this, true);
+                f.setVisible(true);
+                return null;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistroPersonas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Persona persona = new Persona(
+            userId, 
+            Nombre.getText(), 
+            Apellido.getText(), 
+            Direccion.getText(), 
+            Ciudad.getText(), 
+            Departamento.getText()
+        );
+        persona.setPassword(String.valueOf(Password.getPassword()));
+
+        try {
+            datosPersonas.updateOrCreate(persona);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        var personaPregunta = new PersonaPregunta(
+            userId, 
+            pregunta.getPregId(), 
+            respuestaTextArea.getText().trim()
+        );
+
+        try {
+            datosPersonaPregunta.create(personaPregunta);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return persona;
     }
 
     /**
@@ -62,7 +132,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
         L_Titulo = new javax.swing.JLabel();
         preguntasComboBox = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        respuestaTextArea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -122,7 +192,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(jTextArea1);
+        jScrollPane1.setViewportView(respuestaTextArea);
 
         jLabel1.setText("Pregunta de seguridad:");
 
@@ -253,14 +323,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
-//
-//        Persona persona = new Persona(Integer.parseInt(Cedula.getText()), Nombre.getText(), Apellido.getText(),
-//                Direccion.getText(), Ciudad.getText(), Departamento.getText(), String.valueOf(Password.getPassword()));
-//        try{
-//        persona.cargarADB();
-//        }catch(SQLException x){
-//            System.out.println("Algo salio mal");
-//        }
+        registrarPersona();
     }//GEN-LAST:event_BotonRegistroActionPerformed
 
     private void CiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CiudadActionPerformed
@@ -307,8 +370,8 @@ public class RegistroPersonas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox<String> preguntasComboBox;
+    private javax.swing.JTextArea respuestaTextArea;
     private javax.swing.JComboBox<String> rolComboBox;
     // End of variables declaration//GEN-END:variables
 }

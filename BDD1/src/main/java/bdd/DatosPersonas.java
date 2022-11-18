@@ -43,57 +43,60 @@ public class DatosPersonas {
         
         return personas;
     }
+    
+    public Persona getById(int id) throws SQLException {
+        String sql = "SELECT user_id, " +
+                            "nombres, " +
+                            "apellidos, " +
+                            "direccion, " +
+                            "ciudad, " +
+                            "departamento, " +
+                            "hashpwd " +
+                        "FROM PERSONAS " +
+                        "WHERE user_id = ?";
 
-    public void save(Persona persona) throws SQLException {
-        if (persona.userId == null) {
-            create(persona);
-        } else {
-            update(persona);
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, id);
+
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Persona(
+                    rs.getInt("user_id"), 
+                    rs.getString("nombres"),
+                    rs.getString("apellidos"),
+                    rs.getString("direccion"),
+                    rs.getString("ciudad"),
+                    rs.getString("departamento"),
+                    rs.getString("hashpwd")
+                );
+            }
         }
+        
+        return null;
     }
 
-    private void create(Persona persona) throws SQLException {
-        String sql = "INSERT INTO PERSONAS(nombres, apellidos, direccion, ciudad, departamento, hashpwd) " +
-                     "VALUES(?, ?, ?, ?, ?, ?);";
-        try (PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            st.setString(1, persona.nombres);
-            st.setString(2, persona.apellidos);
-            st.setString(3, persona.direccion);
-            st.setString(4, persona.ciudad);
-            st.setString(5, persona.departamento);
-            st.setString(6, persona.hashpwd);
+    public void updateOrCreate(Persona persona) throws SQLException {
+        String sql = "INSERT INTO PERSONAS(user_id, nombres, apellidos, direccion, ciudad, departamento, hashpwd) " +
+                     "VALUES(?, ?, ?, ?, ?, ?, ?) " + 
+                     "ON CONFLICT(user_id) DO UPDATE SET " +
+                     "nombres = EXCLUDED.nombres, " +
+                     "apellidos = EXCLUDED.apellidos, " +
+                     "direccion = EXCLUDED.direccion, " +
+                     "ciudad = EXCLUDED.ciudad, " +
+                     "departamento = EXCLUDED.departamento, " +
+                     "hashpwd = EXCLUDED.hashpwd";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, persona.userId);
+            st.setString(2, persona.nombres);
+            st.setString(3, persona.apellidos);
+            st.setString(4, persona.direccion);
+            st.setString(5, persona.ciudad);
+            st.setString(6, persona.departamento);
+            st.setString(7, persona.hashpwd);
 
             if (persona.hashpwd == null || persona.hashpwd.isBlank()) {
                 throw new RuntimeException("FIXME");
             }
-
-            st.execute();
-            
-            ResultSet rs = st.getGeneratedKeys();            
-            while (rs.next()) {
-                persona.userId = rs.getInt(1);
-            }
-        }
-    }
-    
-    private void update(Persona persona) throws SQLException {
-        String sql = "UPDATE PERSONAS " +
-                     "SET nombres = ? " +
-                     "SET apellidos = ? " +
-                     "SET direccion = ? " +
-                     "SET ciudad = ? " +
-                     "SET departamento = ? " +
-                     "SET hashpwd = ? " +
-                     "WHERE userId = ?";
-        
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            st.setString(1, persona.nombres);
-            st.setString(2, persona.apellidos);
-            st.setString(3, persona.direccion);
-            st.setString(4, persona.ciudad);
-            st.setString(5, persona.departamento);
-            st.setString(6, persona.hashpwd);
-            st.setInt(7, persona.userId);
 
             st.execute();
         }

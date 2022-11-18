@@ -36,6 +36,8 @@ public class BDD1 {
         var datosRolNegocio = new DatosRolNegocio(Conn.getInstance().getConn());
 
         var frame = new RegistroPersonas(
+            datosPersonas,
+            datosPersonaPregunta,
             datosPreguntas.getAll(),
             datosRolNegocio.getAll(),
             datosAplicativos.getAll()

@@ -7,15 +7,24 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class Persona {
 
-    public Integer userId;
+    public int userId;
     public String nombres;
     public String apellidos;
     public String direccion;
     public String ciudad;
     public String departamento;
     public String hashpwd;
+
+    public Persona(int userId, 
+                   String nombres, 
+                   String apellidos, 
+                   String direccion, 
+                   String ciudad, 
+                   String departamento) {
+        this(userId, nombres, apellidos, direccion, ciudad, departamento, null);
+    }
     
-    public Persona(Integer userId, 
+    public Persona(int userId, 
                    String nombres, 
                    String apellidos, 
                    String direccion, 

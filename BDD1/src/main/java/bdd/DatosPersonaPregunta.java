@@ -35,11 +35,7 @@ public class DatosPersonaPregunta {
         return personaPregunta;
     }
 
-    public void save(PersonaPregunta personaPregunta) throws SQLException {
-        create(personaPregunta);
-    }
-
-    private void create(PersonaPregunta personaPregunta) throws SQLException {
+    public void create(PersonaPregunta personaPregunta) throws SQLException {
         String sql = "INSERT INTO PERSONAS_PREGUNTAS(user_id, preg_id, respuesta) " +
                      "VALUES(?, ?, ?);";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
