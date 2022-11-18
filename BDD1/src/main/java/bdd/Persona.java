@@ -7,7 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class Persona {
 
-    public int userId;
+    public Integer userId;
     public String nombres;
     public String apellidos;
     public String direccion;
@@ -15,7 +15,7 @@ public class Persona {
     public String departamento;
     public String hashpwd;
     
-    public Persona(int userId, 
+    public Persona(Integer userId, 
                    String nombres, 
                    String apellidos, 
                    String direccion, 
@@ -39,7 +39,7 @@ public class Persona {
     public boolean isPasswordCorrect(String pwd) {
         return BCrypt.checkpw(pwd, hashpwd);
     }
-    
+
     @Override
     public String toString() {
         return "Persona(" + userId + ", " + nombres + " " + apellidos + ")";
