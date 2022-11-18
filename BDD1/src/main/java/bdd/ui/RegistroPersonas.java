@@ -54,13 +54,27 @@ public class RegistroPersonas extends javax.swing.JFrame {
         //     AplicativosComboBox.addItem(x.getNombreApp());
         // });
     }
+    
+    public void mostrarError(String mensaje) {
+        var f = new ErrorDialog(this, true, mensaje);
+        f.setVisible(true);
+    }
 
     public Persona registrarPersona() {
-        Pregunta pregunta = null;
-        
-        if (preguntasComboBox.getSelectedIndex() != 0) {
-            pregunta = opcionesPreguntas.get(preguntasComboBox.getSelectedIndex() - 1);
+        if (preguntasComboBox.getSelectedIndex() == 0) {
+            mostrarError("Seleccione una pregunta de seguridad");
+            return null;
         }
+        
+        String nombre = Nombre.getText().trim();
+        
+        if (nombre.isEmpty()) {
+            mostrarError("El campo Nombre no puede estar vacío");
+            return null;
+        }
+        
+        Pregunta pregunta = opcionesPreguntas.get(preguntasComboBox.getSelectedIndex() - 1);
+        
 //        var rolNegocio = opcionesRolNegocio.get(rolComboBox.getSelectedIndex() - 1);
 //        var aplicativo = opcionesAplicativo.get(AplicativosComboBox.getSelectedIndex() - 1);
 
@@ -68,8 +82,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
         
         try {
             if (datosPersonas.getById(userId) != null) {
-                var f = new PersonaYaExiste(this, true);
-                f.setVisible(true);
+                mostrarError("Usuario ya existe");
                 return null;
             }
         } catch (SQLException ex) {
@@ -78,7 +91,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
 
         Persona persona = new Persona(
             userId, 
-            Nombre.getText(), 
+            nombre,
             Apellido.getText(), 
             Direccion.getText(), 
             Ciudad.getText(), 
