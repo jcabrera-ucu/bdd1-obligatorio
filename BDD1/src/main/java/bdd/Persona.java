@@ -39,4 +39,9 @@ public class Persona {
     public boolean isPasswordCorrect(String pwd) {
         return BCrypt.checkpw(pwd, hashpwd);
     }
+    
+    @Override
+    public String toString() {
+        return "Persona(" + userId + ", " + nombres + " " + apellidos + ")";
+    }
 }
