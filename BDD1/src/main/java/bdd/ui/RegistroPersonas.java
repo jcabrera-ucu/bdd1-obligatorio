@@ -67,9 +67,50 @@ public class RegistroPersonas extends javax.swing.JFrame {
         }
         
         String nombre = Nombre.getText().trim();
+        String apellido = Apellido.getText().trim();
+        String direccion = Direccion.getText().trim();
+        String ciudad = Ciudad.getText().trim();
+        String departamento = Departamento.getText().trim();
+        String respuesta = respuestaTextArea.getText().trim();
+        String password = String.valueOf(Password.getPassword());
         
         if (nombre.isEmpty()) {
             mostrarError("El campo Nombre no puede estar vacío");
+            return null;
+        }
+        
+        if (apellido.isEmpty()) {
+            mostrarError("El campo Apellido no puede estar vacío");
+            return null;
+        }
+        
+        if (direccion.isEmpty()) {
+            mostrarError("El campo Direccion no puede estar vacío");
+            return null;
+        }
+        
+        if (ciudad.isEmpty()) {
+            mostrarError("El campo Ciudad no puede estar vacío");
+            return null;
+        }
+        
+        if (departamento.isEmpty()) {
+            mostrarError("El campo Departamento no puede estar vacío");
+            return null;
+        }
+        
+        if (respuesta.isEmpty()) {
+            mostrarError("El campo Respuesta no puede estar vacío");
+            return null;
+        }
+        
+        if (password.isEmpty()) {
+            mostrarError("El campo Contraseña no puede estar vacío");
+            return null;
+        }
+        
+        if (Cedula.getText().trim().isEmpty()) {
+            mostrarError("El campo Cédula no puede estar vacío");
             return null;
         }
         
@@ -92,12 +133,13 @@ public class RegistroPersonas extends javax.swing.JFrame {
         Persona persona = new Persona(
             userId, 
             nombre,
-            Apellido.getText(), 
-            Direccion.getText(), 
-            Ciudad.getText(), 
-            Departamento.getText()
+            apellido, 
+            direccion,
+            ciudad,
+            departamento
         );
-        persona.setPassword(String.valueOf(Password.getPassword()));
+        
+        persona.setPassword(password);
 
         try {
             datosPersonas.updateOrCreate(persona);
@@ -109,7 +151,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
         var personaPregunta = new PersonaPregunta(
             userId, 
             pregunta.getPregId(), 
-            respuestaTextArea.getText().trim()
+            respuesta
         );
 
         try {
