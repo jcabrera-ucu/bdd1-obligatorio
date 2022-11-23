@@ -1,5 +1,7 @@
 package bdd;
 
+import bdd.ui.CambiarContraseña;
+import bdd.ui.LoginPersonas;
 import bdd.ui.RegistroPersonas;
 import java.sql.*;
 import java.util.logging.Level;
@@ -34,8 +36,10 @@ public class BDD1 {
         var datosPersonaPregunta = new DatosPersonaPregunta(Conn.getInstance().getConn());
         var datosAplicativos = new DatosAplicativos(Conn.getInstance().getConn());
         var datosRolNegocio = new DatosRolNegocio(Conn.getInstance().getConn());
-
-        var frame = new RegistroPersonas(
+        
+        
+        
+       var frame = new RegistroPersonas(
             datosPersonas,
             datosPersonaPregunta,
             datosPreguntas.getAll(),

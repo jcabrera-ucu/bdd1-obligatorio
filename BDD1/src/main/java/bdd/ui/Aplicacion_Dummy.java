@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package bdd.ui;
 
 /**
@@ -26,6 +23,7 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         Fritar = new javax.swing.JButton();
         Hervir = new javax.swing.JButton();
         Hornear = new javax.swing.JButton();
@@ -37,6 +35,18 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
         Lavar = new javax.swing.JButton();
         Vigilar = new javax.swing.JButton();
         Putear = new javax.swing.JButton();
+        contraseñaCambiar = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +72,13 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
 
         Putear.setText("Putear");
 
+        contraseñaCambiar.setText("Cambiar Contraseña");
+        contraseñaCambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contraseñaCambiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,14 +92,15 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
                     .addComponent(Servir)
                     .addComponent(Reponer)
                     .addComponent(Cobrar))
-                .addGap(47, 47, 47)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Batir)
+                    .addComponent(contraseñaCambiar)
                     .addComponent(Putear)
-                    .addComponent(Echar)
+                    .addComponent(Vigilar)
                     .addComponent(Lavar)
-                    .addComponent(Vigilar))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addComponent(Echar)
+                    .addComponent(Batir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,12 +126,22 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
                     .addComponent(Cobrar)
                     .addComponent(Putear))
                 .addGap(18, 18, 18)
-                .addComponent(Reponer)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Reponer)
+                    .addComponent(contraseñaCambiar))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void contraseñaCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaCambiarActionPerformed
+        // TODO add your handling code here:
+        //Mover esto a select aplicacion desp
+        var frameContraC = new CambiarContraseña();
+        frameContraC.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_contraseñaCambiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -128,5 +156,7 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
     private javax.swing.JButton Reponer;
     private javax.swing.JButton Servir;
     private javax.swing.JButton Vigilar;
+    private javax.swing.JButton contraseñaCambiar;
+    private javax.swing.JDesktopPane jDesktopPane1;
     // End of variables declaration//GEN-END:variables
 }
