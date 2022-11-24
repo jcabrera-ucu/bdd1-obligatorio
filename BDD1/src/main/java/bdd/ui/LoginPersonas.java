@@ -1,6 +1,10 @@
 package bdd.ui;
 
+import bdd.Conn;
+import bdd.DatosPersonas;
 import bdd.Persona;
+import java.sql.SQLException;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginPersonas extends javax.swing.JFrame {
 
@@ -16,7 +20,7 @@ public class LoginPersonas extends javax.swing.JFrame {
         f.setVisible(true);
     }
     
-    public Persona logearPersona() {
+    public Persona logearPersona() throws SQLException {
         if (String.valueOf(Contraseña.getPassword()).isEmpty()) {
             mostrarError("El campo Contraseña no puede estar vacío");
             return null;
@@ -31,9 +35,17 @@ public class LoginPersonas extends javax.swing.JFrame {
         String password = String.valueOf(Contraseña.getPassword());
         var userId = Integer.parseInt(Cedula.getText());
         
-        //HACER QUE LOGE Y TRAIGA LA PERSONA
+        var datosPersonas = new DatosPersonas(Conn.getInstance().getConn());
         
-        return null;
+        //HACER QUE LOGE Y TRAIGA LA PERSONA
+        Persona p = datosPersonas.getById(userId);
+        if (p != null){
+            if(!p.hashpwd.equals(String.valueOf(BCrypt.hashpw(password, BCrypt.gensalt())))){
+                mostrarError("La contraseña es incorrecta");
+                return null;
+            }
+        }
+        return p;
     };
     /**
      * This method is called from within the constructor to initialize the form.
