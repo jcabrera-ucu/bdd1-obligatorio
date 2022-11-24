@@ -4,6 +4,8 @@ import bdd.Conn;
 import bdd.DatosPersonas;
 import bdd.Persona;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginPersonas extends javax.swing.JFrame {
@@ -34,12 +36,18 @@ public class LoginPersonas extends javax.swing.JFrame {
         }*/
         String password = String.valueOf(Contraseña.getPassword());
         var userId = Integer.parseInt(Cedula.getText());
+        System.out.println("cedula "+ userId);
+        System.out.print("contra ");
+        System.out.println(BCrypt.hashpw(password, BCrypt.gensalt()));
+        
+        System.out.println("tiene que ser igual a $2a$10$9TY51ukli7ZBLRG2O0tVW.QyS/4xS5SLghjKvxCkUH2viECgDoBU2");
         
         var datosPersonas = new DatosPersonas(Conn.getInstance().getConn());
         
-        //HACER QUE LOGE Y TRAIGA LA PERSONA
         Persona p = datosPersonas.getById(userId);
+        
         if (p != null){
+            System.out.println("llegue");
             if(!p.hashpwd.equals(String.valueOf(BCrypt.hashpw(password, BCrypt.gensalt())))){
                 mostrarError("La contraseña es incorrecta");
                 return null;
@@ -153,8 +161,14 @@ public class LoginPersonas extends javax.swing.JFrame {
 
     private void BottonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BottonLoginActionPerformed
         // TODO add your handling code here:
-        Persona p = logearPersona();
+        Persona p = null;
+        try {
+            p = logearPersona();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (p != null) {
+            System.out.println("exito");
             var frameAplicacionS = new SelectAplicacion();
             frameAplicacionS.setVisible(true);
             this.setVisible(false);

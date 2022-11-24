@@ -146,8 +146,6 @@ INSERT INTO ROLES_NEGOCIO VALUES (10, 'host');
 INSERT INTO ROLES_NEGOCIO VALUES (11, 'ratatuille');
 INSERT INTO ROLES_NEGOCIO VALUES (12, 12, 'administrador_de_seguridad');
 
-
-
 -- ROLES APLICATIVOS -----------------------
 -- -----------------------------------------
 
@@ -216,9 +214,9 @@ INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (11, 11, 11);
 
 -- PERSONAS --------------------------------------
 -- -----------------------------------------------
-
--- INSERT INTO PERSONAS VALUES (1, 'Juan', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
--- INSERT INTO PERSONAS VALUES (2, 'Nicolas Mazzey', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo',  '4d186321c1a7f0f354b297e8914ab240');
+-- contraseña sin hashear "1234"
+INSERT INTO PERSONAS VALUES (1, 'Juan', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo', '$2a$10$fjLgD0GO7.pcJuzWY7m4Yensnq3e8hoUoKSCmdXIvxEmm0DRW7ENK');
+INSERT INTO PERSONAS VALUES (2, 'Nicolas Mazzey', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo',  '$2a$10$fjLgD0GO7.pcJuzWY7m4Yensnq3e8hoUoKSCmdXIvxEmm0DRW7ENK');
 -- INSERT INTO PERSONAS VALUES (3, 'Federico', 'Ferreira', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
 
 
