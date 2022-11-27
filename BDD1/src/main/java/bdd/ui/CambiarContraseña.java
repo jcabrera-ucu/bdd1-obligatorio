@@ -28,7 +28,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
         f.setVisible(true);
     }
     
-    public boolean CambiarContraseña(Persona Usuario) throws SQLException {
+    public boolean CambiarContraseña() throws SQLException {
         if (String.valueOf(Contraseña_Anterior.getPassword()).isEmpty()) {
             mostrarError("El campo Contraseña anterior no puede estar vacío");
             return false;
@@ -41,9 +41,9 @@ public class CambiarContraseña extends javax.swing.JFrame {
         String contrA = String.valueOf(Contraseña_Anterior.getPassword());
         String contrN = String.valueOf(Contraseña_Nueva.getPassword());
         
-        if(BCrypt.checkpw(contrA, Usuario.hashpwd)){
-            Usuario.setPassword(contrN);
-            this.datosPersonas.updateOrCreate(Usuario);
+        if(BCrypt.checkpw(contrA, usuario.hashpwd)){
+            usuario.setPassword(contrN);
+            this.datosPersonas.updateOrCreate(usuario);
             return true;
         } else{
             mostrarError("La contraseña anterior es incorrecta");
@@ -122,7 +122,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
         boolean exito = false;
         try {
             // TODO add your handling code here:
-            exito = CambiarContraseña(usuario);
+            exito = CambiarContraseña();
         } catch (SQLException ex) {
             Logger.getLogger(CambiarContraseña.class.getName()).log(Level.SEVERE, null, ex);
         }

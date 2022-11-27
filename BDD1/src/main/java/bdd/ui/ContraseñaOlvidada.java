@@ -4,19 +4,84 @@
  */
 package bdd.ui;
 
+import bdd.DatosPersonaPregunta;
+import bdd.DatosPersonas;
+import bdd.Persona;
+import bdd.PersonaPregunta;
+import bdd.Pregunta;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fede2
  */
 public class ContraseñaOlvidada extends javax.swing.JFrame {
-
-    /**
-     * Creates new form ContraseñaOlvidada
-     */
-    public ContraseñaOlvidada() {
+    private final Persona usuario;
+    private final DatosPersonas datosPersonas;
+    private final List<Pregunta> opcionesPreguntas;
+    private final DatosPersonaPregunta datosPersonaPregunta;
+    
+    public ContraseñaOlvidada(Persona Usuario, DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, List<Pregunta> preguntas) {
+        
         initComponents();
+        
+        this.usuario = Usuario;
+        this.datosPersonas = DatosPersonas;
+        this.opcionesPreguntas = preguntas;
+        this.datosPersonaPregunta = datosPersonaPregunta;
+                
+        opcionesPreguntas.forEach(x -> {
+            Preguntas.addItem(x.getPregunta());
+        });
     }
-
+    
+    public void mostrarError(String mensaje) {
+        var f = new ErrorDialog(this, true, mensaje);
+        f.setVisible(true);
+    }
+    
+    public boolean ContraOlvidada() throws SQLException {
+        
+        if (String.valueOf(Contraseña_Nueva.getPassword()).isEmpty()) {
+            mostrarError("El campo Contraseña nueva no puede estar vacío");
+            return false;
+        }
+        
+        if (Preguntas.getSelectedIndex() == 0) {
+            mostrarError("Seleccione una pregunta de seguridad");
+            return false;
+        }
+        
+        Pregunta pregunta = opcionesPreguntas.get(Preguntas.getSelectedIndex() - 1);
+        String respuesta = Respuesta.getText().trim();
+        
+        if (respuesta.isEmpty()) {
+            mostrarError("El campo respuesta no puede estar vacío");
+            return false;
+        }
+        
+        PersonaPregunta UsrPreg = datosPersonaPregunta.getByUserId(usuario.userId);
+        
+        if(UsrPreg != null && pregunta.getPregId() == UsrPreg.pregId){
+            if (UsrPreg.respuesta.equals(respuesta)) {
+                System.out.println("llegue");
+                String password = String.valueOf(Contraseña_Nueva.getPassword());
+                
+                usuario.setPassword(password);
+                this.datosPersonas.updateOrCreate(usuario);
+                return true;
+            } else {
+                mostrarError("La respuesta es incorrecta");
+            return false;
+            }
+        } else {
+            mostrarError("Esa pregunta no fue respondida al registrarse");
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,30 +93,33 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Preguntas = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Respuesta = new javax.swing.JTextField();
+        Botton = new javax.swing.JButton();
+        Contraseña_Nueva = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Recuperar Contraseña");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Preguntas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jLabel2.setText("Seleccione su pregunta de seguridad.");
 
         jLabel3.setText("Ingrese su respuesta.");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Botton.setText("Hecho");
+        Botton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                BottonActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Hecho");
+        jLabel4.setText("Contraseña nueva");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,12 +129,14 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1)
+                    .addComponent(Botton)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
+                        .addComponent(Contraseña_Nueva, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Preguntas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Respuesta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                    .addComponent(jLabel4))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -77,14 +147,18 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Preguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Respuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Contraseña_Nueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(Botton)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -101,18 +175,34 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void BottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BottonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        boolean exito = false;
+        try {
+            // TODO add your handling code here:
+            exito = ContraOlvidada();
+        } catch (SQLException ex) {
+            Logger.getLogger(ContraseñaOlvidada.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (exito){
+            System.out.println("llegue 2");
+            var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, opcionesPreguntas);
+            framelogin.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_BottonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton Botton;
+    private javax.swing.JPasswordField Contraseña_Nueva;
+    private javax.swing.JComboBox<String> Preguntas;
+    private javax.swing.JTextField Respuesta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

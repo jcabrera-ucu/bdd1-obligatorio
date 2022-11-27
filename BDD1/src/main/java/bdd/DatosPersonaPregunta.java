@@ -34,6 +34,32 @@ public class DatosPersonaPregunta {
         
         return personaPregunta;
     }
+    
+    public PersonaPregunta getByUserId(int Usrid) throws SQLException {
+        String sql = "SELECT user_id, " +
+                            "pregId " +
+                            "respuesta" +
+                        "FROM PERSONAS_PREGUNTAS " +
+                        "WHERE user_id = ?";
+
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setInt(1, Usrid);
+               
+            System.out.println(Usrid);
+            
+            ResultSet rs = st.executeQuery();
+            
+            while (rs.next()) {
+                return new PersonaPregunta(
+                    rs.getInt("user_id"), 
+                    rs.getInt("pregId"),
+                    rs.getString("respuesta")
+                );
+            }
+        }
+        
+        return null;
+    }
 
     public void create(PersonaPregunta personaPregunta) throws SQLException {
         String sql = "INSERT INTO PERSONAS_PREGUNTAS(user_id, preg_id, respuesta) " +

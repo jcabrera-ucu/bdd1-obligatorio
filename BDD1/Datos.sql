@@ -214,10 +214,15 @@ INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (11, 11, 11);
 
 -- PERSONAS --------------------------------------
 -- -----------------------------------------------
--- contraseña sin hashear "1234"
+-- contraseña sin hashear es "1234"
 INSERT INTO PERSONAS VALUES (1, 'Juan', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo', '$2a$10$fjLgD0GO7.pcJuzWY7m4Yensnq3e8hoUoKSCmdXIvxEmm0DRW7ENK');
 INSERT INTO PERSONAS VALUES (2, 'Nicolas Mazzey', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo',  '$2a$10$fjLgD0GO7.pcJuzWY7m4Yensnq3e8hoUoKSCmdXIvxEmm0DRW7ENK');
 -- INSERT INTO PERSONAS VALUES (3, 'Federico', 'Ferreira', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
+
+--PERSONAS_PREGUNTAS------------------------------
+-- -----------------------------------------------
+INSERT INTO PERSONAS_PREGUNTAS VALUES (1, 1, 'mascota');
+INSERT INTO PERSONAS_PREGUNTAS VALUES (2, 1, 'mascota');
 
 
 -- PERMISOS ---------------------------------------

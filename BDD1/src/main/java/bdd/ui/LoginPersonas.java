@@ -1,23 +1,31 @@
 package bdd.ui;
 
-import bdd.Conn;
+import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
 import bdd.Persona;
+import bdd.Pregunta;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginPersonas extends javax.swing.JFrame {
     private final DatosPersonas datosPersonas;
+    private final List<Pregunta> opcionesPreguntas;
+    private final DatosPersonaPregunta datosPersonaPregunta;
     
     /**
      * Creates new form LoginPersonas
      */
-    public LoginPersonas(DatosPersonas DatosPersonas) {
+    public LoginPersonas(DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, List<Pregunta> preguntas) {
         initComponents();
         
         this.datosPersonas = DatosPersonas;
+        this.opcionesPreguntas = preguntas;
+        this.datosPersonaPregunta = datosPersonaPregunta;
+        
+        
     }
     
     public void mostrarError(String mensaje) {
@@ -39,7 +47,6 @@ public class LoginPersonas extends javax.swing.JFrame {
         }*/
         String password = String.valueOf(Contraseña.getPassword());
         var userId = Integer.parseInt(Cedula.getText());
-        var datosPersonas = new DatosPersonas(Conn.getInstance().getConn());
         
         Persona p = datosPersonas.getById(userId);
         
@@ -48,9 +55,23 @@ public class LoginPersonas extends javax.swing.JFrame {
                 mostrarError("La contraseña es incorrecta");
                 return null;
             }
+        } else {
+            mostrarError("El Usuario no se encuentra registrado");
+            return null;
         }
         return p;
     };
+    
+    public Persona paraOlvidarContraseña() throws SQLException{
+        if (Cedula.getText().trim().isEmpty()) {
+            mostrarError("El campo Cédula no puede estar vacío para olvidar contraseña");
+            return null;
+        }
+        var userId = Integer.parseInt(Cedula.getText());
+        Persona usr = datosPersonas.getById(userId);
+        
+        return usr;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,9 +170,18 @@ public class LoginPersonas extends javax.swing.JFrame {
 
     private void BotonContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonContraseñaActionPerformed
         // TODO add your handling code here:
-        var frameContra = new ContraseñaOlvidada();
-        frameContra.setVisible(true);
-        this.setVisible(false);
+        
+        Persona usuario = null;
+        try {
+            usuario = paraOlvidarContraseña();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (usuario != null) {
+            var frameContra = new ContraseñaOlvidada(usuario, datosPersonas, datosPersonaPregunta, opcionesPreguntas);
+            frameContra.setVisible(true);
+            this.setVisible(false);
+        }
         
     }//GEN-LAST:event_BotonContraseñaActionPerformed
 
