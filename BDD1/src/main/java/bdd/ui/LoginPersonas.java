@@ -36,19 +36,12 @@ public class LoginPersonas extends javax.swing.JFrame {
         }*/
         String password = String.valueOf(Contraseña.getPassword());
         var userId = Integer.parseInt(Cedula.getText());
-        System.out.println("cedula "+ userId);
-        System.out.print("contra ");
-        System.out.println(BCrypt.hashpw(password, BCrypt.gensalt()));
-        
-        System.out.println("tiene que ser igual a $2a$10$9TY51ukli7ZBLRG2O0tVW.QyS/4xS5SLghjKvxCkUH2viECgDoBU2");
-        
         var datosPersonas = new DatosPersonas(Conn.getInstance().getConn());
         
         Persona p = datosPersonas.getById(userId);
         
         if (p != null){
-            System.out.println("llegue");
-            if(!p.hashpwd.equals(String.valueOf(BCrypt.hashpw(password, BCrypt.gensalt())))){
+            if( !BCrypt.checkpw(password, p.hashpwd)){
                 mostrarError("La contraseña es incorrecta");
                 return null;
             }
@@ -168,7 +161,6 @@ public class LoginPersonas extends javax.swing.JFrame {
             Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (p != null) {
-            System.out.println("exito");
             var frameAplicacionS = new SelectAplicacion();
             frameAplicacionS.setVisible(true);
             this.setVisible(false);
