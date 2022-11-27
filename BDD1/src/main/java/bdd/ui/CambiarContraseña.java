@@ -1,19 +1,55 @@
 
 package bdd.ui;
 
-/**
- *
- * @author Nicolas
- */
+
+import bdd.DatosPersonas;
+import bdd.Persona;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.mindrot.jbcrypt.BCrypt;
+
+
 public class CambiarContraseña extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CambiarContraseña
-     */
-    public CambiarContraseña() {
+    
+    private final Persona usuario;
+    private final DatosPersonas datosPersonas;
+    
+    public CambiarContraseña(Persona Usuario, DatosPersonas DatosPersonas) {
+        
         initComponents();
+        
+        this.usuario = Usuario;
+        this.datosPersonas = DatosPersonas;
     }
-
+    
+    public void mostrarError(String mensaje) {
+        var f = new ErrorDialog(this, true, mensaje);
+        f.setVisible(true);
+    }
+    
+    public boolean CambiarContraseña(Persona Usuario) throws SQLException {
+        if (String.valueOf(Contraseña_Anterior.getPassword()).isEmpty()) {
+            mostrarError("El campo Contraseña anterior no puede estar vacío");
+            return false;
+        }
+        if (String.valueOf(Contraseña_Nueva.getPassword()).isEmpty()) {
+            mostrarError("El campo Contraseña nueva no puede estar vacío");
+            return false;
+        }
+        
+        String contrA = String.valueOf(Contraseña_Anterior.getPassword());
+        String contrN = String.valueOf(Contraseña_Nueva.getPassword());
+        
+        if(BCrypt.checkpw(contrA, Usuario.hashpwd)){
+            Usuario.setPassword(contrN);
+            this.datosPersonas.updateOrCreate(Usuario);
+            return true;
+        } else{
+            mostrarError("La contraseña anterior es incorrecta");
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -23,12 +59,12 @@ public class CambiarContraseña extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Contraseña_Anterior = new javax.swing.JTextField();
-        Contraseña_Nueva = new javax.swing.JTextField();
         Boton = new javax.swing.JButton();
         L_ContraseñaNueva = new javax.swing.JLabel();
         L_contraseñaAnterior = new javax.swing.JLabel();
         L_Titulo = new javax.swing.JLabel();
+        Contraseña_Nueva = new javax.swing.JPasswordField();
+        Contraseña_Anterior = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,14 +88,14 @@ public class CambiarContraseña extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Boton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(L_contraseñaAnterior)
-                    .addComponent(L_Titulo)
-                    .addComponent(Contraseña_Anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(L_Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(L_ContraseñaNueva)
-                    .addComponent(Contraseña_Nueva, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+                    .addComponent(Boton)
+                    .addComponent(Contraseña_Nueva)
+                    .addComponent(Contraseña_Anterior))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,15 +119,26 @@ public class CambiarContraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActionPerformed
-        // TODO add your handling code here:
+        boolean exito = false;
+        try {
+            // TODO add your handling code here:
+            exito = CambiarContraseña(usuario);
+        } catch (SQLException ex) {
+            Logger.getLogger(CambiarContraseña.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(exito){
+            var frameAplicacionS = new SelectAplicacion(usuario, datosPersonas);
+            frameAplicacionS.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_BotonActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton;
-    private javax.swing.JTextField Contraseña_Anterior;
-    private javax.swing.JTextField Contraseña_Nueva;
+    private javax.swing.JPasswordField Contraseña_Anterior;
+    private javax.swing.JPasswordField Contraseña_Nueva;
     private javax.swing.JLabel L_ContraseñaNueva;
     private javax.swing.JLabel L_Titulo;
     private javax.swing.JLabel L_contraseñaAnterior;

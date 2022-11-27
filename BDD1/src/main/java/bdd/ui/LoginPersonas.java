@@ -9,12 +9,15 @@ import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginPersonas extends javax.swing.JFrame {
-
+    private final DatosPersonas datosPersonas;
+    
     /**
      * Creates new form LoginPersonas
      */
-    public LoginPersonas() {
+    public LoginPersonas(DatosPersonas DatosPersonas) {
         initComponents();
+        
+        this.datosPersonas = DatosPersonas;
     }
     
     public void mostrarError(String mensaje) {
@@ -161,7 +164,7 @@ public class LoginPersonas extends javax.swing.JFrame {
             Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (p != null) {
-            var frameAplicacionS = new SelectAplicacion();
+            var frameAplicacionS = new SelectAplicacion(p, datosPersonas);
             frameAplicacionS.setVisible(true);
             this.setVisible(false);
         }

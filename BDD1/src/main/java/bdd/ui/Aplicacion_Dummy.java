@@ -6,7 +6,7 @@ package bdd.ui;
  * @author Nicolas
  */
 public class Aplicacion_Dummy extends javax.swing.JFrame {
-
+     
     /**
      * Creates new form Aplicacion_Dummy
      */
@@ -35,7 +35,6 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
         Lavar = new javax.swing.JButton();
         Vigilar = new javax.swing.JButton();
         Putear = new javax.swing.JButton();
-        contraseñaCambiar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -72,13 +71,6 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
 
         Putear.setText("Putear");
 
-        contraseñaCambiar.setText("Cambiar Contraseña");
-        contraseñaCambiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contraseñaCambiarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,13 +86,12 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
                     .addComponent(Cobrar))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contraseñaCambiar)
                     .addComponent(Putear)
                     .addComponent(Vigilar)
                     .addComponent(Lavar)
                     .addComponent(Echar)
                     .addComponent(Batir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,22 +117,12 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
                     .addComponent(Cobrar)
                     .addComponent(Putear))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Reponer)
-                    .addComponent(contraseñaCambiar))
+                .addComponent(Reponer)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void contraseñaCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaCambiarActionPerformed
-        // TODO add your handling code here:
-        //Mover esto a select aplicacion desp
-        var frameContraC = new CambiarContraseña();
-        frameContraC.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_contraseñaCambiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -156,7 +137,6 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
     private javax.swing.JButton Reponer;
     private javax.swing.JButton Servir;
     private javax.swing.JButton Vigilar;
-    private javax.swing.JButton contraseñaCambiar;
     private javax.swing.JDesktopPane jDesktopPane1;
     // End of variables declaration//GEN-END:variables
 }

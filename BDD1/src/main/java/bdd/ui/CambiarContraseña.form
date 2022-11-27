@@ -25,15 +25,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="Boton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="L_contraseñaAnterior" min="-2" max="-2" attributes="0"/>
-                  <Component id="L_Titulo" min="-2" max="-2" attributes="0"/>
-                  <Component id="Contraseña_Anterior" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                  <Component id="L_Titulo" max="32767" attributes="0"/>
                   <Component id="L_ContraseñaNueva" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Contraseña_Nueva" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                  <Component id="Boton" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="Contraseña_Nueva" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Contraseña_Anterior" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="76" max="32767" attributes="0"/>
+              <EmptySpace pref="104" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,10 +58,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="Contrase&#xf1;a_Anterior">
-    </Component>
-    <Component class="javax.swing.JTextField" name="Contrase&#xf1;a_Nueva">
-    </Component>
     <Component class="javax.swing.JButton" name="Boton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cambiar contrase&#xf1;a"/>
@@ -87,6 +83,10 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cambiar contrase&#xf1;a:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="Contrase&#xf1;a_Nueva">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="Contrase&#xf1;a_Anterior">
     </Component>
   </SubComponents>
 </Form>

@@ -404,7 +404,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
                 this.setVisible(false);
             } else {
             */
-            var frameAplicacionS = new SelectAplicacion();
+            var frameAplicacionS = new SelectAplicacion( per ,datosPersonas);
             frameAplicacionS.setVisible(true);
             this.setVisible(false);
           //}
@@ -433,7 +433,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
 
     private void BotonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLoginActionPerformed
         // TODO add your handling code here:
-        var framelogin = new LoginPersonas();
+        var framelogin = new LoginPersonas(datosPersonas);
         framelogin.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BotonLoginActionPerformed

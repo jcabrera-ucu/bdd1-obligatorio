@@ -52,14 +52,13 @@
               </Group>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="contraseñaCambiar" min="-2" max="-2" attributes="0"/>
                   <Component id="Putear" min="-2" max="-2" attributes="0"/>
                   <Component id="Vigilar" min="-2" max="-2" attributes="0"/>
                   <Component id="Lavar" min="-2" max="-2" attributes="0"/>
                   <Component id="Echar" min="-2" max="-2" attributes="0"/>
                   <Component id="Batir" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="71" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,10 +91,7 @@
                   <Component id="Putear" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Reponer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="contraseñaCambiar" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="Reponer" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -156,14 +152,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Putear"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="contrase&#xf1;aCambiar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cambiar Contrase&#xf1;a"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="contrase&#xf1;aCambiarActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
