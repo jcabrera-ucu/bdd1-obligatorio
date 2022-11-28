@@ -10,6 +10,8 @@ DROP TABLE APLICATIVOS,
            ROLES_NEGOCIO,
            ROLES_NEGOCIOS_APLICATIVOS;
 
+DROP VIEW IF EXISTS solicitudes_permisos;
+
 -- OK
 CREATE TABLE IF NOT EXISTS PREGUNTAS (
     preg_id serial PRIMARY KEY,
@@ -25,7 +27,7 @@ CREATE TABLE IF NOT EXISTS ROLES_NEGOCIO (
 -- OK
 CREATE TABLE IF NOT EXISTS APLICATIVOS (
     app_id serial PRIMARY KEY,
-    nobreapp varchar(20) NOT NULL
+    nombreapp varchar(20) NOT NULL
 );
 
 -- OK
@@ -199,3 +201,20 @@ INSERT INTO PERSONAS_PREGUNTAS VALUES (2, 1, 'mascota');
 -- INSERT INTO PERMISOS VALUES (1, 1, 1, '2022/12/10', '2022/12/11', 'autorizado');
 -- INSERT INTO PERMISOS VALUES (2, 2, 2, '2022/12/10', '2022/12/11', 'autorizado');
 -- INSERT INTO PERMISOS VALUES (3, 3, 3, '2022/12/10', '2022/12/11', 'autorizado');
+
+CREATE VIEW solicitudes_permisos
+AS
+    SELECT permisos.user_id, 
+           permisos.rol_neg_id,
+           permisos.app_id,
+           nombres, 
+           apellidos, 
+           descripcion_rol_neg, 
+           aplicativos.nombreapp, 
+           fecha_solicitud, 
+           fecha_autorizacion, 
+           estado 
+    FROM permisos, personas, roles_negocio, aplicativos 
+    WHERE permisos.user_id = personas.user_id 
+      AND permisos.rol_neg_id = roles_negocio.rol_neg_id 
+      AND permisos.app_id = aplicativos.app_id; 

@@ -1,13 +1,42 @@
 package bdd.ui;
 
+import bdd.DatosPermiso;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 
 public class GestionIdentidadesPermisos extends javax.swing.JFrame {
 
+    private final DatosPermiso datosPermisos;
+    
     /**
      * Creates new form GestionIdentidadesPermisos
      */
-    public GestionIdentidadesPermisos() {
+    public GestionIdentidadesPermisos(DatosPermiso datosPermisos) {
+        this.datosPermisos = datosPermisos;
+        
         initComponents();
+        
+        try {
+            var permisos = datosPermisos.getAll();
+            
+            permisos.stream()
+                    .map(x -> new String[] {
+                        x.userId,
+                        x.appId,
+                        x.rolnegId,
+                        x.fechaSolicitud,
+                        x.fechaAutorizacion,
+                        x.estado
+                    }).toList();
+//        DefaultTableModel model = new DefaultTableModel();
+//        model.setDataVector(dataVector, 
+//            new String[] { "Usuario", } );
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionIdentidadesPermisos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -20,14 +49,14 @@ public class GestionIdentidadesPermisos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -43,7 +72,7 @@ public class GestionIdentidadesPermisos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla);
 
         jButton1.setBackground(new java.awt.Color(204, 255, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -108,6 +137,6 @@ public class GestionIdentidadesPermisos extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

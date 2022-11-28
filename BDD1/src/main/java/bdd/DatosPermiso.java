@@ -52,8 +52,19 @@ public class DatosPermiso {
             st.setInt(1, permiso.userId);
             st.setInt(2, permiso.rolnegId);
             st.setInt(3, permiso.appId);
-            st.setDate(4, new java.sql.Date(permiso.fechaSolicitud.getTime()));
-            st.setDate(5, new java.sql.Date(permiso.fechaAutorizacion.getTime()));
+            
+            if (permiso.fechaSolicitud != null) {
+                st.setDate(4, new java.sql.Date(permiso.fechaSolicitud.getTime()));
+            } else {
+                st.setDate(4, null);
+            }
+            
+            if (permiso.fechaAutorizacion != null) {
+                st.setDate(5, new java.sql.Date(permiso.fechaAutorizacion.getTime()));
+            } else {
+                st.setDate(5, null);
+            }
+            
             st.setString(6, permiso.estado);
 
             st.execute();

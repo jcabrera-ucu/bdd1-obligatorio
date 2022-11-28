@@ -49,11 +49,11 @@ public class SelectAplicacion extends javax.swing.JFrame {
             aplicativosComboBox.addItem(x.getNombreApp());
         });
     }
-    
-    public void mostrarError(String mensaje) {
-        var f = new ErrorDialog(this, true, mensaje);
-        f.setVisible(true);
-    }
+//    
+//    public void mostrarError(String mensaje) {
+//        var f = new ErrorDialog(this, true, mensaje);
+//        f.setVisible(true);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,19 +142,9 @@ public class SelectAplicacion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //FALTA LA LOGICA PARA ELEGIR LA APLICACION
-        
-        if (rolesComboBox.getSelectedIndex() == 0) {
-            mostrarError("Seleccione un rol");
-            return;
-        }
-        
-        if (aplicativosComboBox.getSelectedIndex() == 0) {
-            mostrarError("Seleccione un aplicativo");
-            return;
-        }
-        
-        var aplicativo = opcionesAplicativo.get(aplicativosComboBox.getSelectedIndex() - 1);  
-        var rol = opcionesRolNegocio.get(rolesComboBox.getSelectedIndex() - 1);  
+
+        var aplicativo = opcionesAplicativo.get(aplicativosComboBox.getSelectedIndex());  
+        var rol = opcionesRolNegocio.get(rolesComboBox.getSelectedIndex());  
         
         try {
             datosPermiso.create(new Permiso(
