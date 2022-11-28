@@ -3,6 +3,7 @@ package bdd.ui;
 
 
 import bdd.Aplicativo;
+import bdd.DatosPermiso;
 import bdd.DatosPersonas;
 import bdd.Persona;
 import bdd.RolNegocio;
@@ -17,17 +18,19 @@ public class CambiarContraseña extends javax.swing.JFrame {
     
     private final Persona usuario;
     private final DatosPersonas datosPersonas;
+    private final DatosPermiso datosPermiso;
     private final List<RolNegocio> opcionesRolNegocio;
     private final List<Aplicativo> opcionesAplicativo;
 
     
-    public CambiarContraseña(Persona Usuario, DatosPersonas DatosPersonas, List<RolNegocio> roles,
+    public CambiarContraseña(Persona Usuario, DatosPersonas DatosPersonas, DatosPermiso datosPermiso, List<RolNegocio> roles,
                          List<Aplicativo> aplicativos) {
         
         initComponents();
         
         this.usuario = Usuario;
         this.datosPersonas = DatosPersonas;
+        this.datosPermiso = datosPermiso;
         this.opcionesRolNegocio = roles;
         this.opcionesAplicativo = aplicativos;        
 
@@ -146,7 +149,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
             Logger.getLogger(CambiarContraseña.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(exito){
-            var frameAplicacionS = new SelectAplicacion(usuario, datosPersonas, opcionesRolNegocio, opcionesAplicativo);
+            var frameAplicacionS = new SelectAplicacion(usuario, datosPersonas, datosPermiso, opcionesRolNegocio, opcionesAplicativo);
             frameAplicacionS.setVisible(true);
             this.setVisible(false);
         }

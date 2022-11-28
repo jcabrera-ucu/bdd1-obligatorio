@@ -5,6 +5,7 @@
 package bdd.ui;
 
 import bdd.Aplicativo;
+import bdd.DatosPermiso;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
 import bdd.Persona;
@@ -23,19 +24,21 @@ import java.util.logging.Logger;
 public class ContraseñaOlvidada extends javax.swing.JFrame {
     private final Persona usuario;
     private final DatosPersonas datosPersonas;
+    private final DatosPermiso datosPermiso;
     private final List<Pregunta> opcionesPreguntas;
     private final DatosPersonaPregunta datosPersonaPregunta;
     private final List<RolNegocio> opcionesRolNegocio;
     private final List<Aplicativo> opcionesAplicativo;
 
     
-    public ContraseñaOlvidada(Persona Usuario, DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, List<Pregunta> preguntas, List<RolNegocio> roles,
+    public ContraseñaOlvidada(Persona Usuario, DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, DatosPermiso datosPermiso, List<Pregunta> preguntas, List<RolNegocio> roles,
                          List<Aplicativo> aplicativos) {
         
         initComponents();
         
         this.usuario = Usuario;
         this.datosPersonas = DatosPersonas;
+        this.datosPermiso = datosPermiso;
         this.opcionesPreguntas = preguntas;
         this.datosPersonaPregunta = datosPersonaPregunta;
         this.opcionesRolNegocio = roles;
@@ -197,7 +200,7 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
         
         if (exito){
             System.out.println("llegue 2");
-            var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
+            var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, datosPermiso, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
             framelogin.setVisible(true);
             this.setVisible(false);
         }

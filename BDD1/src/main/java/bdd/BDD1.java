@@ -16,11 +16,13 @@ public class BDD1 {
         var datosPersonaPregunta = new DatosPersonaPregunta(Conn.getInstance().getConn());
         var datosAplicativos = new DatosAplicativos(Conn.getInstance().getConn());
         var datosRolNegocio = new DatosRolNegocio(Conn.getInstance().getConn());
+        var datosPermisos = new DatosPermiso(Conn.getInstance().getConn());
         
         
         var frame = new RegistroPersonas(
             datosPersonas,
             datosPersonaPregunta,
+            datosPermisos,
             datosPreguntas.getAll(),
             datosRolNegocio.getAll(),
             datosAplicativos.getAll()

@@ -20,6 +20,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="enabled" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -40,59 +41,51 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="Fritar" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Hervir" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Hornear" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Servir" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Reponer" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="Cobrar" min="-2" max="-2" attributes="0"/>
+                  <Component id="Hervir" alignment="1" max="32767" attributes="0"/>
+                  <Component id="Fritar" max="32767" attributes="0"/>
+                  <Component id="Hornear" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Servir" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Cobrar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Reponer" alignment="0" pref="357" max="32767" attributes="0"/>
+                  <Component id="Batir" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Echar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Lavar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Vigilar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="Putear" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="Putear" min="-2" max="-2" attributes="0"/>
-                  <Component id="Vigilar" min="-2" max="-2" attributes="0"/>
-                  <Component id="Lavar" min="-2" max="-2" attributes="0"/>
-                  <Component id="Echar" min="-2" max="-2" attributes="0"/>
-                  <Component id="Batir" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="71" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Fritar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Batir" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Hervir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Echar" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Hornear" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Lavar" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Servir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Vigilar" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Cobrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Putear" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Fritar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Hervir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Hornear" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Servir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Cobrar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="Reponer" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Batir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Echar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Lavar" min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Vigilar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Putear" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,56 +94,67 @@
     <Component class="javax.swing.JButton" name="Fritar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fritar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Hervir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hervir"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Hornear">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hornear"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Servir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Servir"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Cobrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cobrar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Reponer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reponer"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Batir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Batir"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Echar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Echar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Lavar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Lavar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Vigilar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vigilar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Putear">
       <Properties>
         <Property name="text" type="java.lang.String" value="Putear"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>

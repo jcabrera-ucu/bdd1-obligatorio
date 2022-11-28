@@ -43,10 +43,10 @@ public class DatosPermiso {
         return permisos;
     }
 
-    public void updateOrCreate(Permiso permiso) throws SQLException {
-        String sql = "INSERT INTO PERMISOS(user_id, rol_neg_id, app_id, fecha_solicitud, fecha_autorizacion,"
-                + " estado) "
-                + "VALUES(?, ?, ?, ?, ?, ?) ";
+    public void create(Permiso permiso) throws SQLException {
+        String sql = 
+            "INSERT INTO PERMISOS(user_id, rol_neg_id, app_id, fecha_solicitud, fecha_autorizacion, estado) "
+            + "VALUES(?, ?, ?, ?, ?, ?) ";
 
         try ( PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, permiso.userId);
@@ -55,7 +55,6 @@ public class DatosPermiso {
             st.setDate(4, new java.sql.Date(permiso.fechaSolicitud.getTime()));
             st.setDate(5, new java.sql.Date(permiso.fechaAutorizacion.getTime()));
             st.setString(6, permiso.estado);
-
 
             st.execute();
         }

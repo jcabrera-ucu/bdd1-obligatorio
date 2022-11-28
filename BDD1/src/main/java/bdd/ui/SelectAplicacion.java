@@ -2,12 +2,17 @@
 package bdd.ui;
 
 import bdd.Aplicativo;
+import bdd.DatosPermiso;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
+import bdd.Permiso;
 import bdd.Persona;
 import bdd.Pregunta;
 import bdd.RolNegocio;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,6 +21,7 @@ import java.util.List;
 public class SelectAplicacion extends javax.swing.JFrame {
     private final Persona usuario;
     private final DatosPersonas datosPersonas;
+    private final DatosPermiso datosPermiso;
     private final List<RolNegocio> opcionesRolNegocio;
     private final List<Aplicativo> opcionesAplicativo;
 
@@ -25,20 +31,28 @@ public class SelectAplicacion extends javax.swing.JFrame {
     
     public SelectAplicacion(Persona Usuario, 
                             DatosPersonas DatosPersonas, 
+                            DatosPermiso datosPermiso,
                             List<RolNegocio> roles,
                             List<Aplicativo> aplicativos) {
         initComponents();
         
         this.usuario = Usuario;
         this.datosPersonas = DatosPersonas;
+        this.datosPermiso = datosPermiso;
         this.opcionesRolNegocio = roles;
         this.opcionesAplicativo = aplicativos;
+        
         opcionesRolNegocio.forEach(x -> {
             rolesComboBox.addItem(x.getDescripcionRolNeg());
         });
         opcionesAplicativo.forEach(x -> {
             aplicativosComboBox.addItem(x.getNombreApp());
         });
+    }
+    
+    public void mostrarError(String mensaje) {
+        var f = new ErrorDialog(this, true, mensaje);
+        f.setVisible(true);
     }
 
     /**
@@ -128,13 +142,37 @@ public class SelectAplicacion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //FALTA LA LOGICA PARA ELEGIR LA APLICACION
+        
+        if (rolesComboBox.getSelectedIndex() == 0) {
+            mostrarError("Seleccione un rol");
+            return;
+        }
+        
+        if (aplicativosComboBox.getSelectedIndex() == 0) {
+            mostrarError("Seleccione un aplicativo");
+            return;
+        }
+        
+        var aplicativo = opcionesAplicativo.get(aplicativosComboBox.getSelectedIndex() - 1);  
+        var rol = opcionesRolNegocio.get(rolesComboBox.getSelectedIndex() - 1);  
+        
+        try {
+            datosPermiso.create(new Permiso(
+                    usuario.userId,
+                    rol.getRolNegId(),
+                    aplicativo.getAppId()
+            ));
+        } catch (SQLException ex) {
+            Logger.getLogger(SelectAplicacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         var frameAplicacion = new Aplicacion_Dummy();
         frameAplicacion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarContraseñaActionPerformed
-        var frameContraC = new CambiarContraseña(usuario, datosPersonas, opcionesRolNegocio, opcionesAplicativo);
+        var frameContraC = new CambiarContraseña(usuario, datosPersonas, datosPermiso, opcionesRolNegocio, opcionesAplicativo);
         frameContraC.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CambiarContraseñaActionPerformed

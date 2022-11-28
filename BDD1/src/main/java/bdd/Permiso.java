@@ -21,10 +21,7 @@ public class Permiso {
         this.estado = estado;
     }
     
-    public Permiso(int userId,
-            int rolnegId,
-            int appId,
-            String estado) {
+    public Permiso(int userId, int rolnegId, int appId) {
 
         this.userId = userId;
         this.rolnegId = rolnegId;
