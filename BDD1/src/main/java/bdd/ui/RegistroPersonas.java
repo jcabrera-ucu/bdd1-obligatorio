@@ -14,9 +14,12 @@ import java.util.logging.Logger;
 public class RegistroPersonas extends javax.swing.JFrame {
 
     private final List<Pregunta> opcionesPreguntas;
+    private final List<RolNegocio> opcionesRolNegocio;
+    private final List<Aplicativo> opcionesAplicativo;
 
     private final DatosPersonas datosPersonas;
     private final DatosPersonaPregunta datosPersonaPregunta;
+
 
     /**
      * Creates new form RegistroPersonas
@@ -25,23 +28,33 @@ public class RegistroPersonas extends javax.swing.JFrame {
      * @param roles
      * @param aplicativos
      */
-    public RegistroPersonas(DatosPersonas datosPersonas,
-            DatosPersonaPregunta datosPersonaPregunta,
-            List<Pregunta> preguntas) {
+    public RegistroPersonas(DatosPersonas datosPersonas, 
+                            DatosPersonaPregunta datosPersonaPregunta,
+                            List<Pregunta> preguntas, 
+                            List<RolNegocio> roles,
+                            List<Aplicativo> aplicativos) {
         initComponents();
 
         this.datosPersonas = datosPersonas;
         this.datosPersonaPregunta = datosPersonaPregunta;
 
         this.opcionesPreguntas = preguntas;
+        this.opcionesRolNegocio = roles;
+        this.opcionesAplicativo = aplicativos;
 
         opcionesPreguntas.forEach(x -> {
             preguntasComboBox.addItem(x.getPregunta());
         });
 
-        
-    }
+        // opcionesRolNegocio.forEach(x -> {
+        //     rolComboBox.addItem(x.getDescripcionRolNeg());
+        // });
 
+        // opcionesAplicativo.forEach(x -> {
+        //     AplicativosComboBox.addItem(x.getNombreApp());
+        // });
+    }
+    
     public void mostrarError(String mensaje) {
         var f = new ErrorDialog(this, true, mensaje);
         f.setVisible(true);
@@ -52,7 +65,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
             mostrarError("Seleccione una pregunta de seguridad");
             return null;
         }
-
+        
         String nombre = Nombre.getText().trim();
         String apellido = Apellido.getText().trim();
         String direccion = Direccion.getText().trim();
@@ -60,53 +73,54 @@ public class RegistroPersonas extends javax.swing.JFrame {
         String departamento = Departamento.getText().trim();
         String respuesta = respuestaTextArea.getText().trim();
         String password = String.valueOf(Password.getPassword());
-
+        
         if (nombre.isEmpty()) {
             mostrarError("El campo Nombre no puede estar vacío");
             return null;
         }
-
+        
         if (apellido.isEmpty()) {
             mostrarError("El campo Apellido no puede estar vacío");
             return null;
         }
-
+        
         if (direccion.isEmpty()) {
             mostrarError("El campo Direccion no puede estar vacío");
             return null;
         }
-
+        
         if (ciudad.isEmpty()) {
             mostrarError("El campo Ciudad no puede estar vacío");
             return null;
         }
-
+        
         if (departamento.isEmpty()) {
             mostrarError("El campo Departamento no puede estar vacío");
             return null;
         }
-
+        
         if (respuesta.isEmpty()) {
             mostrarError("El campo Respuesta no puede estar vacío");
             return null;
         }
-
+        
         if (password.isEmpty()) {
             mostrarError("El campo Contraseña no puede estar vacío");
             return null;
         }
-
+        
         if (Cedula.getText().trim().isEmpty()) {
             mostrarError("El campo Cédula no puede estar vacío");
             return null;
         }
-
+        
         Pregunta pregunta = opcionesPreguntas.get(preguntasComboBox.getSelectedIndex() - 1);
-
+        
 //        var rolNegocio = opcionesRolNegocio.get(rolComboBox.getSelectedIndex() - 1);
 //        var aplicativo = opcionesAplicativo.get(AplicativosComboBox.getSelectedIndex() - 1);
-        var userId = Integer.parseInt(Cedula.getText());
 
+        var userId = Integer.parseInt(Cedula.getText());
+        
         try {
             if (datosPersonas.getById(userId) != null) {
                 mostrarError("Usuario ya existe");
@@ -117,14 +131,14 @@ public class RegistroPersonas extends javax.swing.JFrame {
         }
 
         Persona persona = new Persona(
-                userId,
-                nombre,
-                apellido,
-                direccion,
-                ciudad,
-                departamento
+            userId, 
+            nombre,
+            apellido, 
+            direccion,
+            ciudad,
+            departamento
         );
-
+        
         persona.setPassword(password);
 
         try {
@@ -135,9 +149,9 @@ public class RegistroPersonas extends javax.swing.JFrame {
         }
 
         var personaPregunta = new PersonaPregunta(
-                userId,
-                pregunta.getPregId(),
-                respuesta
+            userId, 
+            pregunta.getPregId(), 
+            respuesta
         );
 
         try {
@@ -180,6 +194,10 @@ public class RegistroPersonas extends javax.swing.JFrame {
         Password = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         Cedula = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        rolComboBox = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        AplicativosComboBox = new javax.swing.JComboBox<>();
         BotonLogin = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
@@ -241,6 +259,19 @@ public class RegistroPersonas extends javax.swing.JFrame {
 
         jLabel4.setText("Cedula de Identidad");
 
+        jLabel5.setText("Rol:");
+
+        rolComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+
+        jLabel6.setText("Aplicativo:");
+
+        AplicativosComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        AplicativosComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AplicativosComboBoxActionPerformed(evt);
+            }
+        });
+
         BotonLogin.setText("Iniciar sesión");
         BotonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,8 +288,25 @@ public class RegistroPersonas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(L_Direccion)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(L_Departamento)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(L_Direccion)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Direccion, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Apellido, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(L_Ciudad, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(L_Nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(L_Apellido, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(L_Titulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Nombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Departamento, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Ciudad))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(55, 55, 55)
@@ -303,36 +351,43 @@ public class RegistroPersonas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(L_Direccion)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(L_Direccion)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rolComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(L_Ciudad)
-                            .addComponent(L_Departamento))
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Ciudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Departamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel7)
+                            .addComponent(AplicativosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BotonLogin)
-                            .addComponent(BotonRegistro))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                            .addComponent(L_Departamento)
+                            .addComponent(jLabel3)
+                            .addComponent(BotonLogin))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Departamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 31, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BotonRegistro)))
+                .addContainerGap())
         );
 
         pack();
@@ -341,7 +396,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
     private void BotonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistroActionPerformed
         Persona per;
         per = registrarPersona();
-        if (per != null) {
+        if (per != null){
             //aca hay que ver si es admin tambien
             /* if (es Administrador de Seguridad){
                 var framePermisos = new GestionIdentidadesPermisos();
@@ -357,7 +412,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
             );
             frameAplicacionS.setVisible(true);
             this.setVisible(false);
-            //}
+          //}
         }
     }//GEN-LAST:event_BotonRegistroActionPerformed
 
@@ -368,6 +423,10 @@ public class RegistroPersonas extends javax.swing.JFrame {
     private void DepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartamentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DepartamentoActionPerformed
+
+    private void AplicativosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AplicativosComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AplicativosComboBoxActionPerformed
 
     private void preguntasComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preguntasComboBoxActionPerformed
         // TODO add your handling code here:
@@ -387,6 +446,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Apellido;
+    private javax.swing.JComboBox<String> AplicativosComboBox;
     private javax.swing.JButton BotonLogin;
     private javax.swing.JButton BotonRegistro;
     private javax.swing.JTextField Cedula;
@@ -405,9 +465,12 @@ public class RegistroPersonas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> preguntasComboBox;
     private javax.swing.JTextArea respuestaTextArea;
+    private javax.swing.JComboBox<String> rolComboBox;
     // End of variables declaration//GEN-END:variables
 }

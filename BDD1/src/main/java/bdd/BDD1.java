@@ -21,7 +21,10 @@ public class BDD1 {
         var frame = new RegistroPersonas(
             datosPersonas,
             datosPersonaPregunta,
-            datosPreguntas.getAll());
+            datosPreguntas.getAll(),
+            datosRolNegocio.getAll(),
+            datosAplicativos.getAll()
+        );
         
         
          frame.setVisible(true);

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.Date;
 
 public class DatosPermiso {
 
@@ -32,8 +33,8 @@ public class DatosPermiso {
                         rs.getInt("user_id"),
                         rs.getInt("rol_neg_id"),
                         rs.getInt("app_id"),
-                        rs.getDate("fecha_solicitud"),
-                        rs.getDate("fecha_autorizacion"),
+                        new Date(rs.getDate("fecha_solicitud").getTime()),
+                        new Date(rs.getDate("fecha_autorizacion").getTime()),
                         rs.getString("estado")
                 ));
             }
