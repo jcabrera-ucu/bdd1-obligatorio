@@ -2,9 +2,12 @@
 package bdd.ui;
 
 
+import bdd.Aplicativo;
 import bdd.DatosPersonas;
 import bdd.Persona;
+import bdd.RolNegocio;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -14,13 +17,20 @@ public class CambiarContraseña extends javax.swing.JFrame {
     
     private final Persona usuario;
     private final DatosPersonas datosPersonas;
+    private final List<RolNegocio> opcionesRolNegocio;
+    private final List<Aplicativo> opcionesAplicativo;
+
     
-    public CambiarContraseña(Persona Usuario, DatosPersonas DatosPersonas) {
+    public CambiarContraseña(Persona Usuario, DatosPersonas DatosPersonas, List<RolNegocio> roles,
+                         List<Aplicativo> aplicativos) {
         
         initComponents();
         
         this.usuario = Usuario;
         this.datosPersonas = DatosPersonas;
+        this.opcionesRolNegocio = roles;
+        this.opcionesAplicativo = aplicativos;        
+
     }
     
     public void mostrarError(String mensaje) {
@@ -41,7 +51,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
         String contrA = String.valueOf(Contraseña_Anterior.getPassword());
         String contrN = String.valueOf(Contraseña_Nueva.getPassword());
         
-        if(BCrypt.checkpw(contrA, usuario.hashpwd)){
+        if(usuario.isPasswordCorrect(contrA)){
             usuario.setPassword(contrN);
             this.datosPersonas.updateOrCreate(usuario);
             return true;
@@ -136,7 +146,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
             Logger.getLogger(CambiarContraseña.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(exito){
-            var frameAplicacionS = new SelectAplicacion(usuario, datosPersonas);
+            var frameAplicacionS = new SelectAplicacion(usuario, datosPersonas, opcionesRolNegocio, opcionesAplicativo);
             frameAplicacionS.setVisible(true);
             this.setVisible(false);
         }

@@ -30,17 +30,23 @@
                   <Component id="L_Direccion" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="Direccion" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Cedula" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Apellido" alignment="0" max="32767" attributes="0"/>
-                              <Component id="L_Ciudad" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="L_Nombre" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
-                              <Component id="L_Apellido" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="L_Titulo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="Nombre" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="Ciudad" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="preguntasComboBox" pref="338" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Password" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="AplicativosComboBox" alignment="0" pref="180" max="32767" attributes="0"/>
+                                      <Component id="rolComboBox" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="119" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <Component id="BotonLogin" min="-2" max="-2" attributes="0"/>

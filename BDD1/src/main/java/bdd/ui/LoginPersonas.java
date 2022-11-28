@@ -1,31 +1,36 @@
 package bdd.ui;
 
+import bdd.Aplicativo;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
 import bdd.Persona;
 import bdd.Pregunta;
+import bdd.RolNegocio;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginPersonas extends javax.swing.JFrame {
     private final DatosPersonas datosPersonas;
     private final List<Pregunta> opcionesPreguntas;
     private final DatosPersonaPregunta datosPersonaPregunta;
+    private final List<RolNegocio> opcionesRolNegocio;
+    private final List<Aplicativo> opcionesAplicativo;
+
     
     /**
      * Creates new form LoginPersonas
      */
-    public LoginPersonas(DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, List<Pregunta> preguntas) {
+    public LoginPersonas(DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, List<Pregunta> preguntas, List<RolNegocio> roles,
+                         List<Aplicativo> aplicativos) {
         initComponents();
         
         this.datosPersonas = DatosPersonas;
         this.opcionesPreguntas = preguntas;
         this.datosPersonaPregunta = datosPersonaPregunta;
-        
-        
+        this.opcionesRolNegocio = roles;
+        this.opcionesAplicativo = aplicativos;        
     }
     
     public void mostrarError(String mensaje) {
@@ -51,7 +56,7 @@ public class LoginPersonas extends javax.swing.JFrame {
         Persona p = datosPersonas.getById(userId);
         
         if (p != null){
-            if( !BCrypt.checkpw(password, p.hashpwd)){
+            if(!p.isPasswordCorrect(password)){
                 mostrarError("La contraseña es incorrecta");
                 return null;
             }
@@ -178,7 +183,7 @@ public class LoginPersonas extends javax.swing.JFrame {
             Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (usuario != null) {
-            var frameContra = new ContraseñaOlvidada(usuario, datosPersonas, datosPersonaPregunta, opcionesPreguntas);
+            var frameContra = new ContraseñaOlvidada(usuario, datosPersonas, datosPersonaPregunta, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
             frameContra.setVisible(true);
             this.setVisible(false);
         }
@@ -194,7 +199,7 @@ public class LoginPersonas extends javax.swing.JFrame {
             Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (p != null) {
-            var frameAplicacionS = new SelectAplicacion(p, datosPersonas);
+            var frameAplicacionS = new SelectAplicacion(p, datosPersonas, opcionesRolNegocio, opcionesAplicativo);
             frameAplicacionS.setVisible(true);
             this.setVisible(false);
         }

@@ -260,33 +260,28 @@ public class RegistroPersonas extends javax.swing.JFrame {
                     .addComponent(L_Direccion)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Direccion, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Cedula, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Apellido, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(L_Ciudad, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(L_Nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(L_Apellido, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(L_Titulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Nombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Ciudad))
-                            .addComponent(jLabel7)
-                            .addComponent(BotonLogin))
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BotonRegistro)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1)
-                                .addComponent(preguntasComboBox, 0, 338, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(L_Departamento)
-                                .addComponent(jScrollPane1)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Departamento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1)
+                                    .addComponent(preguntasComboBox, 0, 338, Short.MAX_VALUE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(AplicativosComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 180, Short.MAX_VALUE)
+                                        .addComponent(rolComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jScrollPane1))
+                                .addContainerGap(119, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BotonLogin)
+                                    .addComponent(BotonRegistro)
+                                    .addComponent(jLabel7))
+                                .addGap(49, 49, 49))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,8 +348,13 @@ public class RegistroPersonas extends javax.swing.JFrame {
                 framePermisos.setVisible(true);
                 this.setVisible(false);
             } else {
-             */
-            var frameAplicacionS = new SelectAplicacion(per, datosPersonas);
+            */
+            var frameAplicacionS = new SelectAplicacion( 
+                per ,
+                datosPersonas, 
+                opcionesRolNegocio, 
+                opcionesAplicativo
+            );
             frameAplicacionS.setVisible(true);
             this.setVisible(false);
             //}
@@ -379,7 +379,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
 
     private void BotonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLoginActionPerformed
         // TODO add your handling code here:
-        var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, opcionesPreguntas);
+        var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
         framelogin.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BotonLoginActionPerformed
