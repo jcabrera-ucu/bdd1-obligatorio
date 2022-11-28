@@ -1,39 +1,55 @@
 package bdd.ui;
 
 import bdd.DatosPermiso;
+import bdd.DatosSolicitudPermiso;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.swing.table.DefaultTableModel;
 
 
 public class GestionIdentidadesPermisos extends javax.swing.JFrame {
 
-    private final DatosPermiso datosPermisos;
+    private final DatosSolicitudPermiso datosSolicitudPermiso;
     
     /**
      * Creates new form GestionIdentidadesPermisos
      */
-    public GestionIdentidadesPermisos(DatosPermiso datosPermisos) {
-        this.datosPermisos = datosPermisos;
+    public GestionIdentidadesPermisos(DatosSolicitudPermiso datosSolicitudPermiso) {
+        this.datosSolicitudPermiso = datosSolicitudPermiso;
         
         initComponents();
         
         try {
-            var permisos = datosPermisos.getAll();
+            var permisos = datosSolicitudPermiso.getAll();
             
-            permisos.stream()
+            
+            DefaultTableModel model = new DefaultTableModel();
+            model.setDataVector(
+                (Object[][])
+                permisos.stream()
                     .map(x -> new String[] {
-                        x.userId,
-                        x.appId,
-                        x.rolnegId,
-                        x.fechaSolicitud,
-                        x.fechaAutorizacion,
-                        x.estado
-                    }).toList();
-//        DefaultTableModel model = new DefaultTableModel();
-//        model.setDataVector(dataVector, 
-//            new String[] { "Usuario", } );
+                        String.valueOf(x.permiso.userId),
+                        x.nombres,
+                        x.apellidos,
+                        x.nombreapp,
+                        x.descripcion_rol_neg,
+                        x.permiso.fechaSolicitud.toString(),
+                        x.permiso.fechaAutorizacion.toString(),
+                        x.permiso.estado
+                    }).toArray(),
+                new String[] { 
+                    "CI", 
+                    "Nombre",
+                    "Apellido",
+                    "Aplicativo",
+                    "Rol",
+                    "Fecha Solicitud",
+                    "Fecha Autorizacion",
+                    "Estado",
+                } 
+            );
         } catch (SQLException ex) {
             Logger.getLogger(GestionIdentidadesPermisos.class.getName()).log(Level.SEVERE, null, ex);
         }

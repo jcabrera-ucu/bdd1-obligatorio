@@ -10,7 +10,8 @@ DROP TABLE APLICATIVOS,
            ROLES_NEGOCIO,
            ROLES_NEGOCIOS_APLICATIVOS;
 
-DROP VIEW IF EXISTS solicitudes_permisos;
+DROP VIEW IF EXISTS solicitudes_permisos,
+                    personas_y_permisos;
 
 -- OK
 CREATE TABLE IF NOT EXISTS PREGUNTAS (
@@ -218,3 +219,28 @@ AS
     WHERE permisos.user_id = personas.user_id 
       AND permisos.rol_neg_id = roles_negocio.rol_neg_id 
       AND permisos.app_id = aplicativos.app_id; 
+
+CREATE VIEW personas_y_permisos
+AS
+    SELECT personas.*,
+           aplicativos.*,
+           aplicativos_menu.menu_id,
+           aplicativos_menu.descripcion_menu
+    FROM permisos, 
+         personas, 
+         roles_negocio, 
+         aplicativos,
+         roles_negocios_aplicativos,
+         roles_aplicativos_menu,
+         aplicativos_menu
+    WHERE permisos.user_id = personas.user_id 
+      AND permisos.rol_neg_id = roles_negocio.rol_neg_id 
+      AND permisos.app_id = aplicativos.app_id
+      AND permisos.app_id = roles_negocios_aplicativos.app_id
+      AND permisos.rol_neg_id = roles_negocios_aplicativos.rol_neg_id
+      AND permisos.app_id = roles_aplicativos_menu.app_id
+      AND roles_negocios_aplicativos.rol_id = roles_aplicativos_menu.rol_id
+      AND aplicativos_menu.menu_id = roles_aplicativos_menu.menu_id
+      AND aplicativos_menu.app_id = permisos.app_id
+      AND permisos.estado = 'Autorizado'
+    ;

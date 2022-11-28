@@ -70,4 +70,21 @@ public class DatosPermiso {
             st.execute();
         }
     }
+    
+    public void update(Permiso permiso) throws SQLException {
+        String sql = "UPDATE PERMISOS"
+                   + "SET fecha_autorizacion = ?, estado = ? "
+                   + "WHERE user_id = ? AND rol_neg_id = ? AND app_id = ?";
+
+        try ( PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setDate(1, new java.sql.Date(permiso.fechaAutorizacion.getTime()));
+            st.setString(2, permiso.estado);
+            st.setInt(3, permiso.userId);
+            st.setInt(4, permiso.rolnegId);
+            st.setInt(5, permiso.appId);
+
+            st.execute();
+        }
+    }
+
 }
