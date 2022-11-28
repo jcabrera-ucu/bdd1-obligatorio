@@ -139,11 +139,11 @@ INSERT INTO ROLES_APLICATIVOS VALUES (2, 1, 'Crear Factura');          -- Factur
 INSERT INTO ROLES_APLICATIVOS VALUES (3, 2, 'Ver Inventario');         -- Inventario
 INSERT INTO ROLES_APLICATIVOS VALUES (4, 2, 'Modificar Inventario');   -- Inventario
 INSERT INTO ROLES_APLICATIVOS VALUES (5, 3, 'Ver Menu');               -- Menu
-INSERT INTO ROLES_APLICATIVOS VALUES (6, 4, 'Modificar Menu');         -- Menu
+INSERT INTO ROLES_APLICATIVOS VALUES (6, 3, 'Modificar Menu');         -- Menu
 
 -- ROLES NEGOCIOS APLICATIVOS --------------------
 -- -----------------------------------------------
-
+--                                  rol_neg_id rol_id,app_id
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (2, 2, 3); -- Cocinero, Inventario, Ver Inventario
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (2, 3, 5); -- Cocinero, Menu, Ver Menu
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 2, 3); -- Chef, Inventario, Ver Inventario
