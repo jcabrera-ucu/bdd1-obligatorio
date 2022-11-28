@@ -123,13 +123,14 @@ INSERT INTO PREGUNTAS VALUES (5, '¿Cuál es el nombre de su abuela?');
 INSERT INTO APLICATIVOS VALUES (1, 'Facturacion');
 INSERT INTO APLICATIVOS VALUES (2, 'Inventario');
 INSERT INTO APLICATIVOS VALUES (3, 'Menu');
+INSERT INTO APLICATIVOS VALUES (4, 'Gestion de permisos');
 
 
 
 
 -- ROLES NEGOCIO -----------------------
 -- -------------------------------------
-INSERT INTO ROLES_NEGOCIO VALUES (1,'administrador_de_seguridad');
+INSERT INTO ROLES_NEGOCIO VALUES (1,'administrador_de_seguridad'); -- Gestion de permisos
 INSERT INTO ROLES_NEGOCIO VALUES (2, 'cocinero');  -- Ver Inventario, Ver Menu
 INSERT INTO ROLES_NEGOCIO VALUES (3, 'chef');      -- Ver Inventario, Modificar Inventario, Ver Menu, Modificar Menu
 INSERT INTO ROLES_NEGOCIO VALUES (4, 'mesero');    -- Crear Factura, Ver Menu, Ver Facturas
@@ -143,6 +144,7 @@ INSERT INTO ROLES_APLICATIVOS VALUES (3, 2, 'Ver Inventario');         -- Invent
 INSERT INTO ROLES_APLICATIVOS VALUES (4, 2, 'Modificar Inventario');   -- Inventario
 INSERT INTO ROLES_APLICATIVOS VALUES (5, 3, 'Ver Menu');               -- Menu
 INSERT INTO ROLES_APLICATIVOS VALUES (6, 3, 'Modificar Menu');         -- Menu
+INSERT INTO ROLES_APLICATIVOS VALUES (1, 4, 'Administrar');            -- Gestion Permisos
 
 -- ROLES NEGOCIOS APLICATIVOS --------------------
 -- -----------------------------------------------

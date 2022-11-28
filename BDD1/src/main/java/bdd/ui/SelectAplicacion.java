@@ -2,9 +2,11 @@
 package bdd.ui;
 
 import bdd.Aplicativo;
+import bdd.Conn;
 import bdd.DatosPermiso;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
+import bdd.DatosSolicitudPermiso;
 import bdd.Permiso;
 import bdd.Persona;
 import bdd.Pregunta;
@@ -155,10 +157,16 @@ public class SelectAplicacion extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(SelectAplicacion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        var frameAplicacion = new Aplicacion_Dummy();
-        frameAplicacion.setVisible(true);
-        this.setVisible(false);
+        if ("administrador_de_seguridad".equals(rol.getDescripcionRolNeg()) && "Gestion de permisos".equals(aplicativo.getNombreApp()) ){
+            DatosSolicitudPermiso permisos = new DatosSolicitudPermiso(Conn.getInstance().getConn());
+            var framePermisos = new GestionIdentidadesPermisos(permisos);
+            framePermisos.setVisible(true);
+            this.setVisible(false);
+        } else {
+            var frameAplicacion = new Aplicacion_Dummy();
+            frameAplicacion.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarContraseñaActionPerformed

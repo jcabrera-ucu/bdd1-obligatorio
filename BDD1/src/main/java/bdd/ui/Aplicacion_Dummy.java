@@ -48,7 +48,6 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setEnabled(false);
 
         Fritar.setText("Fritar");
         Fritar.setEnabled(false);
