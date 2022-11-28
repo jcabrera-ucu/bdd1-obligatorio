@@ -1,7 +1,6 @@
 package bdd;
 
 import java.util.*;
-import java.text.*;
 
 public class Permiso {
 

@@ -144,14 +144,14 @@ INSERT INTO ROLES_APLICATIVOS VALUES (6, 3, 'Modificar Menu');         -- Menu
 -- ROLES NEGOCIOS APLICATIVOS --------------------
 -- -----------------------------------------------
 --                                  rol_neg_id rol_id,app_id
-INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (2, 2, 3); -- Cocinero, Inventario, Ver Inventario
-INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (2, 3, 5); -- Cocinero, Menu, Ver Menu
-INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 2, 3); -- Chef, Inventario, Ver Inventario
-INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 2, 4); -- Chef, Inventario, Modificar Inventario
-INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 3, 5); -- Chef, Menu, Ver Menu
-INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 3, 6); -- Chef, Menu, Modificar Menu
-INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (4, 1, 2); -- Mesero, Facturacion, Crear Factura
-INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (4, 3, 5); -- Mesero, Menu, Ver Menu
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (2, 3, 2); -- Cocinero, Inventario, Ver Inventario
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (2, 5, 3); -- Cocinero, Menu, Ver Menu
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 3, 2); -- Chef, Inventario, Ver Inventario
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 4, 2); -- Chef, Inventario, Modificar Inventario
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 5, 3); -- Chef, Menu, Ver Menu
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 6, 3); -- Chef, Menu, Modificar Menu
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (4, 2, 1); -- Mesero, Facturacion, Crear Factura
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (4, 5, 3); -- Mesero, Menu, Ver Menu
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (4, 1, 1); -- Mesero, Facturacion, Ver Facturas
 
 
