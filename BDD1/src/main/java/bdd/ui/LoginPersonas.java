@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class LoginPersonas extends javax.swing.JFrame {
     private final DatosPersonas datosPersonas;
@@ -57,7 +56,7 @@ public class LoginPersonas extends javax.swing.JFrame {
         Persona p = datosPersonas.getById(userId);
         
         if (p != null){
-            if( !BCrypt.checkpw(password, p.hashpwd)){
+            if(!p.isPasswordCorrect(password)){
                 mostrarError("La contraseña es incorrecta");
                 return null;
             }

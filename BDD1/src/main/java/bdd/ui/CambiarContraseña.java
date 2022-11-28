@@ -51,7 +51,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
         String contrA = String.valueOf(Contraseña_Anterior.getPassword());
         String contrN = String.valueOf(Contraseña_Nueva.getPassword());
         
-        if(BCrypt.checkpw(contrA, usuario.hashpwd)){
+        if(usuario.isPasswordCorrect(contrA)){
             usuario.setPassword(contrN);
             this.datosPersonas.updateOrCreate(usuario);
             return true;
