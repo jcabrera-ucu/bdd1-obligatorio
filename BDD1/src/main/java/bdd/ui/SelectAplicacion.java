@@ -1,8 +1,13 @@
 
 package bdd.ui;
 
+import bdd.Aplicativo;
+import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
 import bdd.Persona;
+import bdd.Pregunta;
+import bdd.RolNegocio;
+import java.util.List;
 
 /**
  *
@@ -11,13 +16,29 @@ import bdd.Persona;
 public class SelectAplicacion extends javax.swing.JFrame {
     private final Persona usuario;
     private final DatosPersonas datosPersonas;
+    private final List<RolNegocio> opcionesRolNegocio;
+    private final List<Aplicativo> opcionesAplicativo;
+
+//    private final DatosPersonaPregunta datosPersonaPregunta;
+
     
     
-    public SelectAplicacion(Persona Usuario, DatosPersonas DatosPersonas) {
+    public SelectAplicacion(Persona Usuario, 
+                            DatosPersonas DatosPersonas, 
+                            List<RolNegocio> roles,
+                            List<Aplicativo> aplicativos) {
         initComponents();
         
         this.usuario = Usuario;
         this.datosPersonas = DatosPersonas;
+        this.opcionesRolNegocio = roles;
+        this.opcionesAplicativo = aplicativos;
+        opcionesRolNegocio.forEach(x -> {
+            rolesComboBox.addItem(x.getDescripcionRolNeg());
+        });
+        opcionesAplicativo.forEach(x -> {
+            aplicativosComboBox.addItem(x.getNombreApp());
+        });
     }
 
     /**
@@ -30,10 +51,10 @@ public class SelectAplicacion extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        rolesComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        aplicativosComboBox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         CambiarContraseña = new javax.swing.JButton();
 
@@ -42,13 +63,9 @@ public class SelectAplicacion extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Aplicativos");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("Seleccione su Rol");
 
         jLabel3.setText("Seleccione que aplicativo desea abrir");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Hecho");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -69,37 +86,40 @@ public class SelectAplicacion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rolesComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(aplicativosComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CambiarContraseña))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CambiarContraseña))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(0, 183, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rolesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(CambiarContraseña))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(aplicativosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CambiarContraseña)
+                    .addComponent(jButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,7 +134,7 @@ public class SelectAplicacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CambiarContraseñaActionPerformed
-        var frameContraC = new CambiarContraseña(usuario, datosPersonas);
+        var frameContraC = new CambiarContraseña(usuario, datosPersonas, opcionesRolNegocio, opcionesAplicativo);
         frameContraC.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CambiarContraseñaActionPerformed
@@ -122,11 +142,11 @@ public class SelectAplicacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CambiarContraseña;
+    private javax.swing.JComboBox<String> aplicativosComboBox;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JComboBox<String> rolesComboBox;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,11 +4,13 @@
  */
 package bdd.ui;
 
+import bdd.Aplicativo;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
 import bdd.Persona;
 import bdd.PersonaPregunta;
 import bdd.Pregunta;
+import bdd.RolNegocio;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,8 +25,12 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
     private final DatosPersonas datosPersonas;
     private final List<Pregunta> opcionesPreguntas;
     private final DatosPersonaPregunta datosPersonaPregunta;
+    private final List<RolNegocio> opcionesRolNegocio;
+    private final List<Aplicativo> opcionesAplicativo;
+
     
-    public ContraseñaOlvidada(Persona Usuario, DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, List<Pregunta> preguntas) {
+    public ContraseñaOlvidada(Persona Usuario, DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, List<Pregunta> preguntas, List<RolNegocio> roles,
+                         List<Aplicativo> aplicativos) {
         
         initComponents();
         
@@ -32,6 +38,8 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
         this.datosPersonas = DatosPersonas;
         this.opcionesPreguntas = preguntas;
         this.datosPersonaPregunta = datosPersonaPregunta;
+        this.opcionesRolNegocio = roles;
+        this.opcionesAplicativo = aplicativos;        
                 
         opcionesPreguntas.forEach(x -> {
             Preguntas.addItem(x.getPregunta());
@@ -189,7 +197,7 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
         
         if (exito){
             System.out.println("llegue 2");
-            var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, opcionesPreguntas);
+            var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
             framelogin.setVisible(true);
             this.setVisible(false);
         }
