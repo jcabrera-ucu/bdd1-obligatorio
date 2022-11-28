@@ -21,11 +21,9 @@ public class BDD1 {
         var frame = new RegistroPersonas(
             datosPersonas,
             datosPersonaPregunta,
-            datosPreguntas.getAll(),
-            datosRolNegocio.getAll(),
-            datosAplicativos.getAll()
-         );
-
+            datosPreguntas.getAll());
+        
+        
          frame.setVisible(true);
     }
 }
