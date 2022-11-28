@@ -272,7 +272,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
             }
         });
 
-        BotonLogin.setText("Logearme");
+        BotonLogin.setText("Iniciar sesión");
         BotonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonLoginActionPerformed(evt);

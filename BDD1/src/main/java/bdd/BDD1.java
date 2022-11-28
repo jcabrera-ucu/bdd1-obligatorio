@@ -1,11 +1,7 @@
 package bdd;
 
-import bdd.ui.CambiarContraseña;
-import bdd.ui.LoginPersonas;
 import bdd.ui.RegistroPersonas;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -14,22 +10,6 @@ import java.util.logging.Logger;
 public class BDD1 {
 
     public static void main(String[] args) throws SQLException {
-//         
-//
-//        System.out.println("Preguntas:");
-//        for (var pregunta : new Preguntas(Conn.getInstance().getConn()).getAll()) {
-//            System.out.println("  > " + pregunta.toString());
-//        }
-//
-//        System.out.println("Roles Negocio:");
-//        for (var rolNegocio : new RolesNegocio(Conn.getInstance().getConn()).getAll()) {
-//        }
-//
-////        System.out.println("Aplicativos");
-////        for (var aplicativo : new Aplicativos((Conn.getInstance().connBD).getAll()) {
-////            System.out.println("  > " + aplicativo.toString());
-////        }
-
 
         var datosPersonas = new DatosPersonas(Conn.getInstance().getConn());
         var datosPreguntas = new DatosPreguntas(Conn.getInstance().getConn());
@@ -38,15 +18,14 @@ public class BDD1 {
         var datosRolNegocio = new DatosRolNegocio(Conn.getInstance().getConn());
         
         
-        
-       var frame = new RegistroPersonas(
+        var frame = new RegistroPersonas(
             datosPersonas,
             datosPersonaPregunta,
             datosPreguntas.getAll(),
             datosRolNegocio.getAll(),
             datosAplicativos.getAll()
-        );
+         );
 
-        frame.setVisible(true);
+         frame.setVisible(true);
     }
 }

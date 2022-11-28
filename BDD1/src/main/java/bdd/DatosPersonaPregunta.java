@@ -36,11 +36,8 @@ public class DatosPersonaPregunta {
     }
     
     public PersonaPregunta getByUserId(int Usrid) throws SQLException {
-        String sql = "SELECT user_id, " +
-                            "pregId " +
-                            "respuesta" +
-                        "FROM PERSONAS_PREGUNTAS " +
-                        "WHERE user_id = ?";
+        String sql = "SELECT user_id, preg_id, respuesta " +
+                     "FROM PERSONAS_PREGUNTAS WHERE user_id = ?";
 
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, Usrid);
@@ -52,7 +49,7 @@ public class DatosPersonaPregunta {
             while (rs.next()) {
                 return new PersonaPregunta(
                     rs.getInt("user_id"), 
-                    rs.getInt("pregId"),
+                    rs.getInt("preg_id"),
                     rs.getString("respuesta")
                 );
             }
