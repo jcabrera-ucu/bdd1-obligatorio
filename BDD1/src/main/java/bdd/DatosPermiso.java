@@ -72,7 +72,7 @@ public class DatosPermiso {
     }
     
     public void update(Permiso permiso) throws SQLException {
-        String sql = "UPDATE PERMISOS"
+        String sql = "UPDATE PERMISOS "
                    + "SET fecha_autorizacion = ?, estado = ? "
                    + "WHERE user_id = ? AND rol_neg_id = ? AND app_id = ?";
 

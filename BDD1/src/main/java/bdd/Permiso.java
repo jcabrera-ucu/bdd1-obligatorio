@@ -37,7 +37,7 @@ public class Permiso {
     }
     
     public void denegar(){
-        this.estado = "Denegado";
+        this.estado = "Rechazado";
         this.fechaAutorizacion = new Date();
 
     }

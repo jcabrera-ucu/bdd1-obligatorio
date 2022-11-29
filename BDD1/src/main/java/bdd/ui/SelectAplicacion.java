@@ -159,7 +159,7 @@ public class SelectAplicacion extends javax.swing.JFrame {
         }
         if ("administrador_de_seguridad".equals(rol.getDescripcionRolNeg()) && "Gestion de permisos".equals(aplicativo.getNombreApp()) ){
             DatosSolicitudPermiso permisos = new DatosSolicitudPermiso(Conn.getInstance().getConn());
-            var framePermisos = new GestionIdentidadesPermisos(permisos);
+            var framePermisos = new GestionIdentidadesPermisos(permisos, datosPermiso);
             framePermisos.setVisible(true);
             this.setVisible(false);
         } else {

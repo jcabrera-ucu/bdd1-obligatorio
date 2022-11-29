@@ -30,8 +30,7 @@ public class BDD1 {
             datosAplicativos.getAll()
         );
         var gestor = new GestionIdentidadesPermisos(
-                solicitudesPermisos
-        );
+                solicitudesPermisos, datosPermisos);
         
          gestor.setVisible(true);
          frame.setVisible(true);

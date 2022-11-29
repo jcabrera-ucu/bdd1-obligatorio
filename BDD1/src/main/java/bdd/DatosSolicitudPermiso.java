@@ -30,7 +30,7 @@ public class DatosSolicitudPermiso {
                 + "nombres, "
                 + "apellidos, "
                 + "descripcion_rol_neg, "
-                + "nombreapp"
+                + "nombreapp "
                 + "FROM solicitudes_permisos")) {
             while (rs.next()) {
                 var fs = rs.getDate("fecha_solicitud");
