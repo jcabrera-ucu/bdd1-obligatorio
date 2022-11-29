@@ -24,7 +24,6 @@ public class GestionIdentidadesPermisos extends javax.swing.JFrame {
         try {
             var permisos = datosSolicitudPermiso.getAll();
             
-            
             DefaultTableModel model = new DefaultTableModel();
             model.setDataVector(
                 (Object[][])
@@ -50,6 +49,7 @@ public class GestionIdentidadesPermisos extends javax.swing.JFrame {
                     "Estado",
                 } 
             );
+            tabla.setModel(model);
         } catch (SQLException ex) {
             Logger.getLogger(GestionIdentidadesPermisos.class.getName()).log(Level.SEVERE, null, ex);
         }
