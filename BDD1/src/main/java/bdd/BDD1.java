@@ -1,5 +1,6 @@
 package bdd;
 
+import bdd.ui.GestionIdentidadesPermisos;
 import bdd.ui.RegistroPersonas;
 import java.sql.*;
 
@@ -28,8 +29,11 @@ public class BDD1 {
             datosRolNegocio.getAll(),
             datosAplicativos.getAll()
         );
+        var gestor = new GestionIdentidadesPermisos(
+                solicitudesPermisos
+        );
         
-        
+         gestor.setVisible(true);
          frame.setVisible(true);
     }
 }
