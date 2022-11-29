@@ -6,10 +6,13 @@ import bdd.DatosPermiso;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
 import bdd.DatosPersonasYPermisos;
+import bdd.DatosSolicitudPermiso;
+import bdd.Menu;
 import bdd.Persona;
 import bdd.Pregunta;
 import bdd.RolNegocio;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +26,10 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
     private final DatosPersonas datosPersonas;
     private final DatosPermiso datosPermiso;
     private final DatosPersonasYPermisos datosPersonasYPermisos;
+    private final DatosSolicitudPermiso datosSolicitudesPermisos;
     private final List<RolNegocio> opcionesRolNegocio;
     private final List<Aplicativo> opcionesAplicativo;
+    private List<Menu> menus;
 
     /**
      * Creates new form Aplicacion_Dummy
@@ -33,6 +38,7 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
                             DatosPersonas datosPersonas, 
                             DatosPermiso datosPermiso,
                             DatosPersonasYPermisos datosPersonasYPermisos,
+                            DatosSolicitudPermiso datosSolicitudesPermisos,
                             List<RolNegocio> roles,
                             List<Aplicativo> aplicativos) {
         initComponents();
@@ -41,14 +47,18 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
         this.datosPersonas = datosPersonas;
         this.datosPermiso = datosPermiso;
         this.datosPersonasYPermisos = datosPersonasYPermisos;
+        this.datosSolicitudesPermisos = datosSolicitudesPermisos;
         this.opcionesRolNegocio = roles;
         this.opcionesAplicativo = aplicativos;
+        this.menus = new LinkedList<>();
         
         try {
             var permisos = datosPersonasYPermisos.getById(persona.userId);
             if (permisos.persona != null) {
-                permisos.aplicativos.forEach(app -> {
+                this.menus = permisos.menus;
+                permisos.aplicativos.forEach(app -> {                    
                     switch (app.getAppId()) {
+                        // FIXME: Esto no debería estar hardcodeado
                         case 1 -> facturacionButton.setEnabled(true);
                         case 2 -> inventarioButton.setEnabled(true);
                         case 3 -> menuButton.setEnabled(true);
@@ -57,7 +67,6 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
                     }
                  });
             }
-            System.out.println("HOLA");
         } catch (SQLException ex) {
             Logger.getLogger(Aplicacion_Dummy.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,15 +103,35 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
 
         gestionDePermisosButton.setText("Gestión de Permisos");
         gestionDePermisosButton.setEnabled(false);
+        gestionDePermisosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionDePermisosButtonActionPerformed(evt);
+            }
+        });
 
         facturacionButton.setText("Facturación");
         facturacionButton.setEnabled(false);
+        facturacionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facturacionButtonActionPerformed(evt);
+            }
+        });
 
         menuButton.setText("Menú");
         menuButton.setEnabled(false);
+        menuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuButtonActionPerformed(evt);
+            }
+        });
 
         inventarioButton.setText("Inventario");
         inventarioButton.setEnabled(false);
+        inventarioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inventarioButtonActionPerformed(evt);
+            }
+        });
 
         solicitarPermisosButton.setText("Solicitar Permisos");
         solicitarPermisosButton.addActionListener(new java.awt.event.ActionListener() {
@@ -156,6 +185,28 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
         );
         frameAplicacionS.setVisible(true);
     }//GEN-LAST:event_solicitarPermisosButtonActionPerformed
+
+    private void gestionDePermisosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionDePermisosButtonActionPerformed
+         var gestor = new GestionIdentidadesPermisos(
+                datosSolicitudesPermisos, datosPermiso);
+         gestor.setVisible(true);
+    }//GEN-LAST:event_gestionDePermisosButtonActionPerformed
+
+    private void inventarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventarioButtonActionPerformed
+        
+        var frame = new AplicativoTontito(menus.stream().filter(x -> x.appId == 2).distinct().toList());
+        frame.setVisible(true);
+    }//GEN-LAST:event_inventarioButtonActionPerformed
+
+    private void facturacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturacionButtonActionPerformed
+        var frame = new AplicativoTontito(menus.stream().filter(x -> x.appId == 1).distinct().toList());
+        frame.setVisible(true);
+    }//GEN-LAST:event_facturacionButtonActionPerformed
+
+    private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
+        var frame = new AplicativoTontito(menus.stream().filter(x -> x.appId == 3).distinct().toList());
+        frame.setVisible(true);
+    }//GEN-LAST:event_menuButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,7 @@ import bdd.DatosPermiso;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
 import bdd.DatosPersonasYPermisos;
+import bdd.DatosSolicitudPermiso;
 import bdd.Persona;
 import bdd.PersonaPregunta;
 import bdd.Pregunta;
@@ -27,13 +28,14 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
     private final DatosPersonas datosPersonas;
     private final DatosPermiso datosPermiso;
     private final DatosPersonasYPermisos datosPersonasYPermisos;
+    private final DatosSolicitudPermiso datosSolicitudPermiso;
     private final List<Pregunta> opcionesPreguntas;
     private final DatosPersonaPregunta datosPersonaPregunta;
     private final List<RolNegocio> opcionesRolNegocio;
     private final List<Aplicativo> opcionesAplicativo;
 
     
-    public ContraseñaOlvidada(Persona Usuario, DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, DatosPermiso datosPermiso, DatosPersonasYPermisos datosPersonasYPermisos, List<Pregunta> preguntas, List<RolNegocio> roles,
+    public ContraseñaOlvidada(Persona Usuario, DatosPersonas DatosPersonas, DatosPersonaPregunta datosPersonaPregunta, DatosPermiso datosPermiso, DatosPersonasYPermisos datosPersonasYPermisos, DatosSolicitudPermiso datosSolicitudPermiso, List<Pregunta> preguntas, List<RolNegocio> roles,
                          List<Aplicativo> aplicativos) {
         
         initComponents();
@@ -44,6 +46,7 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
         this.opcionesPreguntas = preguntas;
         this.datosPersonaPregunta = datosPersonaPregunta;
         this.datosPersonasYPermisos = datosPersonasYPermisos;
+        this.datosSolicitudPermiso = datosSolicitudPermiso;
         this.opcionesRolNegocio = roles;
         this.opcionesAplicativo = aplicativos;        
                 
@@ -203,7 +206,7 @@ public class ContraseñaOlvidada extends javax.swing.JFrame {
         
         if (exito){
             System.out.println("llegue 2");
-            var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, datosPermiso, datosPersonasYPermisos, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
+            var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, datosPermiso, datosPersonasYPermisos, datosSolicitudPermiso, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
             framelogin.setVisible(true);
             this.setVisible(false);
         }

@@ -62,7 +62,7 @@ public class DatosPersonasYPermisos {
                 );
 
                 result.aplicativos.add(new Aplicativo(rs.getInt("app_id"), rs.getString("nombreapp")));
-                result.menus.add(new Menu(rs.getInt("user_id"), rs.getInt("app_id"), rs.getString("descripcion_menu")));
+                result.menus.add(new Menu(rs.getInt("menu_id"), rs.getInt("app_id"), rs.getString("descripcion_menu")));
             }
         }
 

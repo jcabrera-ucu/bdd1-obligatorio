@@ -5,6 +5,7 @@ import bdd.DatosPermiso;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
 import bdd.DatosPersonasYPermisos;
+import bdd.DatosSolicitudPermiso;
 import bdd.Persona;
 import bdd.Pregunta;
 import bdd.RolNegocio;
@@ -19,6 +20,7 @@ public class LoginPersonas extends javax.swing.JFrame {
     private final DatosPersonaPregunta datosPersonaPregunta;
     private final DatosPermiso datosPermiso;
     private final DatosPersonasYPermisos datosPersonasYPermisos;
+    private final DatosSolicitudPermiso datosSolicitudPermiso;
     private final List<RolNegocio> opcionesRolNegocio;
     private final List<Aplicativo> opcionesAplicativo;
 
@@ -30,6 +32,7 @@ public class LoginPersonas extends javax.swing.JFrame {
                          DatosPersonaPregunta datosPersonaPregunta,
                          DatosPermiso datosPermiso,
                          DatosPersonasYPermisos datosPersonasYPermisos,
+                         DatosSolicitudPermiso datosSolicitudPermiso,
                          List<Pregunta> preguntas, 
                          List<RolNegocio> roles,
                          List<Aplicativo> aplicativos) {
@@ -40,6 +43,7 @@ public class LoginPersonas extends javax.swing.JFrame {
         this.datosPersonaPregunta = datosPersonaPregunta;
         this.datosPermiso = datosPermiso;
         this.datosPersonasYPermisos = datosPersonasYPermisos;
+        this.datosSolicitudPermiso = datosSolicitudPermiso;
         this.opcionesRolNegocio = roles;
         this.opcionesAplicativo = aplicativos;        
     }
@@ -194,7 +198,7 @@ public class LoginPersonas extends javax.swing.JFrame {
             Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (usuario != null) {
-            var frameContra = new ContraseñaOlvidada(usuario, datosPersonas, datosPersonaPregunta, datosPermiso, datosPersonasYPermisos, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
+            var frameContra = new ContraseñaOlvidada(usuario, datosPersonas, datosPersonaPregunta, datosPermiso, datosPersonasYPermisos, datosSolicitudPermiso, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
             frameContra.setVisible(true);
             this.setVisible(false);
         }
@@ -218,7 +222,7 @@ public class LoginPersonas extends javax.swing.JFrame {
 //                opcionesAplicativo
 //            );
 //            frameAplicacionS.setVisible(true);
-            var aplicativos = new Aplicacion_Dummy(p, datosPersonas, datosPermiso, datosPersonasYPermisos, opcionesRolNegocio, opcionesAplicativo);
+            var aplicativos = new Aplicacion_Dummy(p, datosPersonas, datosPermiso, datosPersonasYPermisos, datosSolicitudPermiso, opcionesRolNegocio, opcionesAplicativo);
             aplicativos.setVisible(true);
 
             this.setVisible(false);

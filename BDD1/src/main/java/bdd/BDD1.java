@@ -20,6 +20,8 @@ public class BDD1 {
         var datosPermisos = new DatosPermiso(Conn.getInstance().getConn());
         var solicitudesPermisos = new DatosSolicitudPermiso(Conn.getInstance().getConn());
         var datosPersonasYPermisos = new DatosPersonasYPermisos(Conn.getInstance().getConn());
+        var datosSolicitudPermiso = new DatosSolicitudPermiso(Conn.getInstance().getConn());
+
         
         
         var frame = new RegistroPersonas(
@@ -27,14 +29,12 @@ public class BDD1 {
             datosPersonaPregunta,
             datosPermisos,
             datosPersonasYPermisos,
+            datosSolicitudPermiso,
             datosPreguntas.getAll(),
             datosRolNegocio.getAll(),
             datosAplicativos.getAll()
         );
-         var gestor = new GestionIdentidadesPermisos(
-                solicitudesPermisos, datosPermisos);
         
-         gestor.setVisible(true);
          frame.setVisible(true);
     }
 }

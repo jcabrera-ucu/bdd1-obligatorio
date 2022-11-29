@@ -133,7 +133,7 @@ INSERT INTO APLICATIVOS VALUES (4, 'Gestion de permisos');
 
 -- ROLES NEGOCIO -----------------------
 -- -------------------------------------
-INSERT INTO ROLES_NEGOCIO VALUES (1,'administrador_de_seguridad'); -- Gestion de permisos
+INSERT INTO ROLES_NEGOCIO VALUES (1, 'administrador_de_seguridad'); -- Gestion de permisos
 INSERT INTO ROLES_NEGOCIO VALUES (2, 'cocinero');  -- Ver Inventario, Ver Menu
 INSERT INTO ROLES_NEGOCIO VALUES (3, 'chef');      -- Ver Inventario, Modificar Inventario, Ver Menu, Modificar Menu
 INSERT INTO ROLES_NEGOCIO VALUES (4, 'mesero');    -- Crear Factura, Ver Menu, Ver Facturas
@@ -161,6 +161,7 @@ INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (3, 6, 3); -- Chef, Menu, Modifica
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (4, 2, 1); -- Mesero, Facturacion, Crear Factura
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (4, 5, 3); -- Mesero, Menu, Ver Menu
 INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (4, 1, 1); -- Mesero, Facturacion, Ver Facturas
+INSERT INTO ROLES_NEGOCIOS_APLICATIVOS VALUES (1, 7, 4); -- 
 
 
 -- APLICATIVOS MENU -----------------------
@@ -172,6 +173,7 @@ INSERT INTO APLICATIVOS_MENU VALUES (3, 2, 'Listar Inventario');        --Invent
 INSERT INTO APLICATIVOS_MENU VALUES (4, 2, 'Modificar Inventario');     --Inventario
 INSERT INTO APLICATIVOS_MENU VALUES (5, 3, 'Listar Menu');              -- Menu
 INSERT INTO APLICATIVOS_MENU VALUES (6, 3, 'Modificar Menu');           -- Menu
+INSERT INTO APLICATIVOS_MENU VALUES (7, 4, 'Gestionar Permisos');       -- Gestión de Permisos
 
 
 
@@ -186,6 +188,7 @@ INSERT INTO ROLES_APLICATIVOS_MENU VALUES (2, 3, 3);
 INSERT INTO ROLES_APLICATIVOS_MENU VALUES (2, 4, 4);
 INSERT INTO ROLES_APLICATIVOS_MENU VALUES (3, 5, 5);
 INSERT INTO ROLES_APLICATIVOS_MENU VALUES (3, 6, 6);
+INSERT INTO ROLES_APLICATIVOS_MENU VALUES (4, 7, 7);
 
 
 -- PERSONAS --------------------------------------

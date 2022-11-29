@@ -80,24 +80,36 @@
         <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Permisos"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gestionDePermisosButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="facturacionButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Facturaci&#xf3;n"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="facturacionButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="menuButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Men&#xfa;"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="inventarioButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inventario"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inventarioButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="solicitarPermisosButton">
       <Properties>

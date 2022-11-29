@@ -21,6 +21,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
     private final DatosPermiso datosPermiso;
     private final DatosPersonaPregunta datosPersonaPregunta;
     private final DatosPersonasYPermisos datosPersonasYPermisos;
+    private final DatosSolicitudPermiso datosSolicitudPermiso;
 
 
     /**
@@ -34,6 +35,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
                             DatosPersonaPregunta datosPersonaPregunta,
                             DatosPermiso datosPermiso,
                             DatosPersonasYPermisos datosPersonasYPermisos,
+                            DatosSolicitudPermiso datosSolicitudPermiso,
                             List<Pregunta> preguntas, 
                             List<RolNegocio> roles,
                             List<Aplicativo> aplicativos) {
@@ -43,6 +45,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
         this.datosPersonaPregunta = datosPersonaPregunta;
         this.datosPermiso = datosPermiso;
         this.datosPersonasYPermisos = datosPersonasYPermisos;
+        this.datosSolicitudPermiso = datosSolicitudPermiso;
 
         this.opcionesPreguntas = preguntas;
         this.opcionesRolNegocio = roles;
@@ -389,7 +392,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
 //                opcionesAplicativo
 //            );
 //            frameAplicacionS.setVisible(true);
-            var aplicativos = new Aplicacion_Dummy(per, datosPersonas, datosPermiso, datosPersonasYPermisos, opcionesRolNegocio, opcionesAplicativo);
+            var aplicativos = new Aplicacion_Dummy(per, datosPersonas, datosPermiso, datosPersonasYPermisos, datosSolicitudPermiso, opcionesRolNegocio, opcionesAplicativo);
             aplicativos.setVisible(true);
             this.setVisible(false);
           //}
@@ -414,7 +417,7 @@ public class RegistroPersonas extends javax.swing.JFrame {
 
     private void BotonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLoginActionPerformed
         // TODO add your handling code here:
-        var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, datosPermiso, datosPersonasYPermisos, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
+        var framelogin = new LoginPersonas(datosPersonas, datosPersonaPregunta, datosPermiso, datosPersonasYPermisos, datosSolicitudPermiso, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
         framelogin.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BotonLoginActionPerformed
