@@ -46,7 +46,8 @@ public class DatosPermiso {
     public void create(Permiso permiso) throws SQLException {
         String sql = 
             "INSERT INTO PERMISOS(user_id, rol_neg_id, app_id, fecha_solicitud, fecha_autorizacion, estado) "
-            + "VALUES(?, ?, ?, ?, ?, ?) ";
+            + "VALUES(?, ?, ?, ?, ?, ?) "
+            + "ON CONFLICT(user_id, rol_neg_id, app_id) DO NOTHING";
 
         try ( PreparedStatement st = connection.prepareStatement(sql)) {
             st.setInt(1, permiso.userId);

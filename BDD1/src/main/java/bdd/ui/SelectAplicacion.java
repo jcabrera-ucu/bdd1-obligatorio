@@ -158,13 +158,13 @@ public class SelectAplicacion extends javax.swing.JFrame {
             Logger.getLogger(SelectAplicacion.class.getName()).log(Level.SEVERE, null, ex);
         }
         if ("administrador_de_seguridad".equals(rol.getDescripcionRolNeg()) && "Gestion de permisos".equals(aplicativo.getNombreApp()) ){
-            DatosSolicitudPermiso permisos = new DatosSolicitudPermiso(Conn.getInstance().getConn());
-            var framePermisos = new GestionIdentidadesPermisos(permisos, datosPermiso);
-            framePermisos.setVisible(true);
+//            DatosSolicitudPermiso permisos = new DatosSolicitudPermiso(Conn.getInstance().getConn());
+//            var framePermisos = new GestionIdentidadesPermisos(permisos);
+//            framePermisos.setVisible(true);
             this.setVisible(false);
         } else {
-            var frameAplicacion = new Aplicacion_Dummy();
-            frameAplicacion.setVisible(true);
+//            var frameAplicacion = new Aplicacion_Dummy();
+//            frameAplicacion.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

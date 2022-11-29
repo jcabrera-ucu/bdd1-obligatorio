@@ -19,17 +19,19 @@ public class BDD1 {
         var datosRolNegocio = new DatosRolNegocio(Conn.getInstance().getConn());
         var datosPermisos = new DatosPermiso(Conn.getInstance().getConn());
         var solicitudesPermisos = new DatosSolicitudPermiso(Conn.getInstance().getConn());
+        var datosPersonasYPermisos = new DatosPersonasYPermisos(Conn.getInstance().getConn());
         
         
         var frame = new RegistroPersonas(
             datosPersonas,
             datosPersonaPregunta,
             datosPermisos,
+            datosPersonasYPermisos,
             datosPreguntas.getAll(),
             datosRolNegocio.getAll(),
             datosAplicativos.getAll()
         );
-        var gestor = new GestionIdentidadesPermisos(
+         var gestor = new GestionIdentidadesPermisos(
                 solicitudesPermisos, datosPermisos);
         
          gestor.setVisible(true);

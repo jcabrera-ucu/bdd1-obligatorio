@@ -43,17 +43,14 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="Hervir" alignment="1" max="32767" attributes="0"/>
-                  <Component id="Fritar" max="32767" attributes="0"/>
-                  <Component id="Hornear" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Servir" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Cobrar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Reponer" alignment="0" pref="357" max="32767" attributes="0"/>
-                  <Component id="Batir" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Echar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Lavar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Vigilar" alignment="0" max="32767" attributes="0"/>
-                  <Component id="Putear" alignment="0" max="32767" attributes="0"/>
+                  <Component id="facturacionButton" alignment="1" max="32767" attributes="0"/>
+                  <Component id="gestionDePermisosButton" pref="370" max="32767" attributes="0"/>
+                  <Component id="menuButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="inventarioButton" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="solicitarPermisosButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -63,98 +60,52 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Fritar" min="-2" max="-2" attributes="0"/>
+              <Component id="gestionDePermisosButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Hervir" min="-2" max="-2" attributes="0"/>
+              <Component id="facturacionButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Hornear" min="-2" max="-2" attributes="0"/>
+              <Component id="menuButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Servir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Cobrar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Reponer" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Batir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Echar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Lavar" min="-2" pref="22" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Vigilar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="Putear" min="-2" max="-2" attributes="0"/>
+              <Component id="inventarioButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="solicitarPermisosButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="Fritar">
+    <Component class="javax.swing.JButton" name="gestionDePermisosButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fritar"/>
+        <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Permisos"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Hervir">
+    <Component class="javax.swing.JButton" name="facturacionButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hervir"/>
+        <Property name="text" type="java.lang.String" value="Facturaci&#xf3;n"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Hornear">
+    <Component class="javax.swing.JButton" name="menuButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hornear"/>
+        <Property name="text" type="java.lang.String" value="Men&#xfa;"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Servir">
+    <Component class="javax.swing.JButton" name="inventarioButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Servir"/>
+        <Property name="text" type="java.lang.String" value="Inventario"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Cobrar">
+    <Component class="javax.swing.JButton" name="solicitarPermisosButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cobrar"/>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="Solicitar Permisos"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="Reponer">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Reponer"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="Batir">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Batir"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="Echar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Echar"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="Lavar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Lavar"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="Vigilar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Vigilar"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="Putear">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Putear"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solicitarPermisosButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

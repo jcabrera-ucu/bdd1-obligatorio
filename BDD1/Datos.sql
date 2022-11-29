@@ -100,6 +100,8 @@ CREATE TABLE IF NOT EXISTS PERMISOS (
     fecha_autorizacion date,
     estado varchar(20) NOT NULL,
 
+    CONSTRAINT permisos_unique UNIQUE (user_id, rol_neg_id, app_id),
+
     FOREIGN KEY (user_id) REFERENCES PERSONAS(user_id),
     FOREIGN KEY (rol_neg_id) REFERENCES ROLES_NEGOCIO(rol_neg_id),
     FOREIGN KEY (app_id) REFERENCES APLICATIVOS(app_id)

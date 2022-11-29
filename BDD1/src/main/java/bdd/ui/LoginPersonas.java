@@ -4,6 +4,7 @@ import bdd.Aplicativo;
 import bdd.DatosPermiso;
 import bdd.DatosPersonaPregunta;
 import bdd.DatosPersonas;
+import bdd.DatosPersonasYPermisos;
 import bdd.Persona;
 import bdd.Pregunta;
 import bdd.RolNegocio;
@@ -17,6 +18,7 @@ public class LoginPersonas extends javax.swing.JFrame {
     private final List<Pregunta> opcionesPreguntas;
     private final DatosPersonaPregunta datosPersonaPregunta;
     private final DatosPermiso datosPermiso;
+    private final DatosPersonasYPermisos datosPersonasYPermisos;
     private final List<RolNegocio> opcionesRolNegocio;
     private final List<Aplicativo> opcionesAplicativo;
 
@@ -27,6 +29,7 @@ public class LoginPersonas extends javax.swing.JFrame {
     public LoginPersonas(DatosPersonas DatosPersonas, 
                          DatosPersonaPregunta datosPersonaPregunta,
                          DatosPermiso datosPermiso,
+                         DatosPersonasYPermisos datosPersonasYPermisos,
                          List<Pregunta> preguntas, 
                          List<RolNegocio> roles,
                          List<Aplicativo> aplicativos) {
@@ -36,6 +39,7 @@ public class LoginPersonas extends javax.swing.JFrame {
         this.opcionesPreguntas = preguntas;
         this.datosPersonaPregunta = datosPersonaPregunta;
         this.datosPermiso = datosPermiso;
+        this.datosPersonasYPermisos = datosPersonasYPermisos;
         this.opcionesRolNegocio = roles;
         this.opcionesAplicativo = aplicativos;        
     }
@@ -190,7 +194,7 @@ public class LoginPersonas extends javax.swing.JFrame {
             Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (usuario != null) {
-            var frameContra = new ContraseñaOlvidada(usuario, datosPersonas, datosPersonaPregunta, datosPermiso, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
+            var frameContra = new ContraseñaOlvidada(usuario, datosPersonas, datosPersonaPregunta, datosPermiso, datosPersonasYPermisos, opcionesPreguntas, opcionesRolNegocio, opcionesAplicativo);
             frameContra.setVisible(true);
             this.setVisible(false);
         }
@@ -206,14 +210,17 @@ public class LoginPersonas extends javax.swing.JFrame {
             Logger.getLogger(LoginPersonas.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (p != null) {
-            var frameAplicacionS = new SelectAplicacion(
-                p, 
-                datosPersonas, 
-                datosPermiso,
-                opcionesRolNegocio, 
-                opcionesAplicativo
-            );
-            frameAplicacionS.setVisible(true);
+//            var frameAplicacionS = new SelectAplicacion(
+//                p, 
+//                datosPersonas, 
+//                datosPermiso,
+//                opcionesRolNegocio, 
+//                opcionesAplicativo
+//            );
+//            frameAplicacionS.setVisible(true);
+            var aplicativos = new Aplicacion_Dummy(p, datosPersonas, datosPermiso, datosPersonasYPermisos, opcionesRolNegocio, opcionesAplicativo);
+            aplicativos.setVisible(true);
+
             this.setVisible(false);
         }
     }//GEN-LAST:event_BottonLoginActionPerformed

@@ -1,17 +1,66 @@
 
 package bdd.ui;
 
+import bdd.Aplicativo;
+import bdd.DatosPermiso;
+import bdd.DatosPersonaPregunta;
+import bdd.DatosPersonas;
+import bdd.DatosPersonasYPermisos;
+import bdd.Persona;
+import bdd.Pregunta;
+import bdd.RolNegocio;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Nicolas
  */
 public class Aplicacion_Dummy extends javax.swing.JFrame {
-     
+    private final Persona persona;
+    private final DatosPersonas datosPersonas;
+    private final DatosPermiso datosPermiso;
+    private final DatosPersonasYPermisos datosPersonasYPermisos;
+    private final List<RolNegocio> opcionesRolNegocio;
+    private final List<Aplicativo> opcionesAplicativo;
+
     /**
      * Creates new form Aplicacion_Dummy
      */
-    public Aplicacion_Dummy() {
+    public Aplicacion_Dummy(Persona persona,
+                            DatosPersonas datosPersonas, 
+                            DatosPermiso datosPermiso,
+                            DatosPersonasYPermisos datosPersonasYPermisos,
+                            List<RolNegocio> roles,
+                            List<Aplicativo> aplicativos) {
         initComponents();
+        
+        this.persona = persona;
+        this.datosPersonas = datosPersonas;
+        this.datosPermiso = datosPermiso;
+        this.datosPersonasYPermisos = datosPersonasYPermisos;
+        this.opcionesRolNegocio = roles;
+        this.opcionesAplicativo = aplicativos;
+        
+        try {
+            var permisos = datosPersonasYPermisos.getById(persona.userId);
+            if (permisos.persona != null) {
+                permisos.aplicativos.forEach(app -> {
+                    switch (app.getAppId()) {
+                        case 1 -> facturacionButton.setEnabled(true);
+                        case 2 -> inventarioButton.setEnabled(true);
+                        case 3 -> menuButton.setEnabled(true);
+                        case 4 -> gestionDePermisosButton.setEnabled(true);
+                        default -> { }
+                    }
+                 });
+            }
+            System.out.println("HOLA");
+        } catch (SQLException ex) {
+            Logger.getLogger(Aplicacion_Dummy.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -24,17 +73,11 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        Fritar = new javax.swing.JButton();
-        Hervir = new javax.swing.JButton();
-        Hornear = new javax.swing.JButton();
-        Servir = new javax.swing.JButton();
-        Cobrar = new javax.swing.JButton();
-        Reponer = new javax.swing.JButton();
-        Batir = new javax.swing.JButton();
-        Echar = new javax.swing.JButton();
-        Lavar = new javax.swing.JButton();
-        Vigilar = new javax.swing.JButton();
-        Putear = new javax.swing.JButton();
+        gestionDePermisosButton = new javax.swing.JButton();
+        facturacionButton = new javax.swing.JButton();
+        menuButton = new javax.swing.JButton();
+        inventarioButton = new javax.swing.JButton();
+        solicitarPermisosButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -49,38 +92,24 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Fritar.setText("Fritar");
-        Fritar.setEnabled(false);
+        gestionDePermisosButton.setText("Gestión de Permisos");
+        gestionDePermisosButton.setEnabled(false);
 
-        Hervir.setText("Hervir");
-        Hervir.setEnabled(false);
+        facturacionButton.setText("Facturación");
+        facturacionButton.setEnabled(false);
 
-        Hornear.setText("Hornear");
-        Hornear.setEnabled(false);
+        menuButton.setText("Menú");
+        menuButton.setEnabled(false);
 
-        Servir.setText("Servir");
-        Servir.setEnabled(false);
+        inventarioButton.setText("Inventario");
+        inventarioButton.setEnabled(false);
 
-        Cobrar.setText("Cobrar");
-        Cobrar.setEnabled(false);
-
-        Reponer.setText("Reponer");
-        Reponer.setEnabled(false);
-
-        Batir.setText("Batir");
-        Batir.setEnabled(false);
-
-        Echar.setText("Echar");
-        Echar.setEnabled(false);
-
-        Lavar.setText("Lavar");
-        Lavar.setEnabled(false);
-
-        Vigilar.setText("Vigilar");
-        Vigilar.setEnabled(false);
-
-        Putear.setText("Putear");
-        Putear.setEnabled(false);
+        solicitarPermisosButton.setText("Solicitar Permisos");
+        solicitarPermisosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                solicitarPermisosButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,63 +118,52 @@ public class Aplicacion_Dummy extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Hervir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Fritar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Hornear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Servir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Cobrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Reponer, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-                    .addComponent(Batir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Echar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Lavar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Vigilar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Putear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(facturacionButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gestionDePermisosButton, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                    .addComponent(menuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inventarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(solicitarPermisosButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Fritar)
+                .addComponent(gestionDePermisosButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Hervir)
+                .addComponent(facturacionButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Hornear)
+                .addComponent(menuButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Servir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Cobrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Reponer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Batir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Echar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Lavar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Vigilar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Putear)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(inventarioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(solicitarPermisosButton)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void solicitarPermisosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solicitarPermisosButtonActionPerformed
+        var frameAplicacionS = new SelectAplicacion( 
+            persona,
+            datosPersonas, 
+            datosPermiso,
+            opcionesRolNegocio, 
+            opcionesAplicativo
+        );
+        frameAplicacionS.setVisible(true);
+    }//GEN-LAST:event_solicitarPermisosButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Batir;
-    private javax.swing.JButton Cobrar;
-    private javax.swing.JButton Echar;
-    private javax.swing.JButton Fritar;
-    private javax.swing.JButton Hervir;
-    private javax.swing.JButton Hornear;
-    private javax.swing.JButton Lavar;
-    private javax.swing.JButton Putear;
-    private javax.swing.JButton Reponer;
-    private javax.swing.JButton Servir;
-    private javax.swing.JButton Vigilar;
+    private javax.swing.JButton facturacionButton;
+    private javax.swing.JButton gestionDePermisosButton;
+    private javax.swing.JButton inventarioButton;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JButton menuButton;
+    private javax.swing.JButton solicitarPermisosButton;
     // End of variables declaration//GEN-END:variables
 }
