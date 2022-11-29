@@ -191,20 +191,17 @@ INSERT INTO ROLES_APLICATIVOS_MENU VALUES (3, 6, 6);
 -- PERSONAS --------------------------------------
 -- -----------------------------------------------
 -- contraseña sin hashear es "1234"
-INSERT INTO PERSONAS VALUES (1, 'Juan', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo', '$2a$10$fjLgD0GO7.pcJuzWY7m4Yensnq3e8hoUoKSCmdXIvxEmm0DRW7ENK');
-INSERT INTO PERSONAS VALUES (2, 'Nicolas Mazzey', 'Cabrera', '8 de octubre', 'Montevideo', 'Montevideo',  '$2a$10$fjLgD0GO7.pcJuzWY7m4Yensnq3e8hoUoKSCmdXIvxEmm0DRW7ENK');
--- INSERT INTO PERSONAS VALUES (3, 'Federico', 'Ferreira', '8 de octubre', 'Montevideo', 'Montevideo', '4d186321c1a7f0f354b297e8914ab240');
+INSERT INTO PERSONAS VALUES (1, 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', '$2a$10$fjLgD0GO7.pcJuzWY7m4Yensnq3e8hoUoKSCmdXIvxEmm0DRW7ENK');
 
 --PERSONAS_PREGUNTAS------------------------------
 -- -----------------------------------------------
-INSERT INTO PERSONAS_PREGUNTAS VALUES (1, 1, 'mascota');
-INSERT INTO PERSONAS_PREGUNTAS VALUES (2, 1, 'mascota');
+INSERT INTO PERSONAS_PREGUNTAS VALUES (1, 1, 'Admin');
 
 
 -- PERMISOS ---------------------------------------
 -- ------------------------------------------------
 
--- INSERT INTO PERMISOS VALUES (1, 1, 1, '2022/12/10', '2022/12/11', 'autorizado');
+INSERT INTO PERMISOS VALUES (1, 1, 4, '1/1/1', '1/1/1', 'Autorizado');
 -- INSERT INTO PERMISOS VALUES (2, 2, 2, '2022/12/10', '2022/12/11', 'autorizado');
 -- INSERT INTO PERMISOS VALUES (3, 3, 3, '2022/12/10', '2022/12/11', 'autorizado');
 
