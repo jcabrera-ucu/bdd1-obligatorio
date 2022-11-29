@@ -1,4 +1,7 @@
 -- BORRAR TODO 
+DROP VIEW IF EXISTS solicitudes_permisos,
+                    personas_y_permisos;
+
 DROP TABLE APLICATIVOS,
            APLICATIVOS_MENU,
            PERMISOS,
@@ -10,8 +13,6 @@ DROP TABLE APLICATIVOS,
            ROLES_NEGOCIO,
            ROLES_NEGOCIOS_APLICATIVOS;
 
-DROP VIEW IF EXISTS solicitudes_permisos,
-                    personas_y_permisos;
 
 -- OK
 CREATE TABLE IF NOT EXISTS PREGUNTAS (
@@ -144,7 +145,7 @@ INSERT INTO ROLES_APLICATIVOS VALUES (3, 2, 'Ver Inventario');         -- Invent
 INSERT INTO ROLES_APLICATIVOS VALUES (4, 2, 'Modificar Inventario');   -- Inventario
 INSERT INTO ROLES_APLICATIVOS VALUES (5, 3, 'Ver Menu');               -- Menu
 INSERT INTO ROLES_APLICATIVOS VALUES (6, 3, 'Modificar Menu');         -- Menu
-INSERT INTO ROLES_APLICATIVOS VALUES (1, 4, 'Administrar');            -- Gestion Permisos
+INSERT INTO ROLES_APLICATIVOS VALUES (7, 4, 'Administrar');            -- Gestion Permisos
 
 -- ROLES NEGOCIOS APLICATIVOS --------------------
 -- -----------------------------------------------
